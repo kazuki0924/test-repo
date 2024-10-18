@@ -1,0 +1,34 @@
+# name: 901_template_cd_infra_terragrunt
+# run-name: template_cd_infra_terragrunt
+# on:
+#   workflow_call: {}
+# concurrency:
+#   group: "${{ github.workflow }}-${{ github.ref }}"
+#   cancel-in-progress: true
+# defaults:
+#   run:
+#     shell: bash
+# permissions:
+#   id-token: write
+#   pull-requests: write
+#   contents: read
+# jobs:
+# # TODO: delete
+# terragrunt-run-all-plan:
+#   name: terraform run-all plan
+#   runs-on: ubuntu-24.04
+#   steps:
+#     - name: checkout
+#       uses: actions/checkout@v4.1.1
+#     - name: terragrunt run-all plan
+#       id: terragrunt-run-all-plan
+#       uses: ./.github/actions/cd/terraform/terragrunt/run-all-plan
+# terragrunt-run-all-apply:
+#   name: terraform run-all apply
+#   runs-on: ubuntu-24.04
+#   steps:
+#     - name: checkout
+#       uses: actions/checkout@v4.1.1
+#     - name: terragrunt run-all apply
+#       id: terragrunt-run-all-apply
+#       uses: ./.github/actions/cd/terraform/terragrunt/run-all-apply

@@ -1,0 +1,329 @@
+# eslint-disable yml/file-extension
+
+# quiet: false
+# debug: false
+# insecure: false
+# timeout: 10m
+# cache-dir: "${HOME}/.cache/trivy"
+# format: table
+# dependency-tree: true
+# list-all-pkgs: true
+# exit-code: 0
+# exit-on-eol: 0
+# output: {}
+# severity:
+#   - UNKNOWN
+#   - LOW
+#   - MEDIUM
+#   - HIGH
+#   - CRITICAL
+# cache:
+#   backend: fs
+#   ttl: 0
+# db:
+#   skip-update: false
+#   no-progress: false
+#   repository: ghcr.io/aquasecurity/trivy-db
+# vulnerability:
+#   type:
+#     - os
+#     - library
+#   ignore-unfixed: false
+# misconfiguration:
+#   include-non-failures: false
+#   terraform:
+#     exclude-downloaded-modules: false
+# cloud:
+#   update-cache: false
+#   max-cache-age: 24h
+#   aws:
+#     region: ap-northeast-1
+
+# ref: https://aquasecurity.github.io/trivy/v0.53/docs/references/configuration/config-file/
+quiet: false
+debug: false
+insecure: false
+timeout: 5m
+cache:
+  dir: "${HOME}/.cache/trivy"
+format: table
+# report: all
+template: {}
+dependency-tree: false
+list-all-pkgs: false
+ignorefile: .trivyignore
+ignore-policy: {}
+exit-code: 0
+exit-on-eol: 0
+
+# Same as '--output'
+# Default is empty (stdout)
+output: {}
+
+# Same as '--severity'
+# Default is all severities
+severity:
+  - UNKNOWN
+  - LOW
+  - MEDIUM
+  - HIGH
+  - CRITICAL
+
+scan:
+  # Same as '--compliance'
+  # Default is empty
+  compliance:
+
+  # Same as '--show-suppressed'
+  # Default is false
+  show-suppressed: false
+
+image:
+  # Same as '--input' (available with 'trivy image')
+  # Default is empty
+  input:
+
+  # Same as '--removed-pkgs'
+  # Default is false
+  removed-pkgs: false
+
+  # Same as '--platform'
+  # Default is empty
+  platform:
+
+  # Same as '--image-src'
+  # Default is 'docker,containerd,podman,remote'
+  source:
+    - podman
+    - docker
+
+  # Same as '--image-config-scanners'
+  # Default is empty
+  image-config-scanners:
+    - misconfig
+    - secret
+
+  docker:
+    # Same as '--docker-host'
+    # Default is empty
+    host:
+
+  podman:
+    # Same as '--podman-host'
+    # Default is empty
+    host:
+
+vulnerability:
+  # Same as '--vuln-type'
+  # Default is 'os,library'
+  type:
+    - os
+    - library
+
+  # Same as '--ignore-unfixed'
+  # Default is false
+  ignore-unfixed: false
+
+  # Same as '--ignore-unfixed'
+  # Default is empty
+  ignore-status:
+    - end_of_life
+
+license:
+  # Same as '--license-full'
+  # Default is false
+  full: false
+
+  # Same as '--ignored-licenses'
+  # Default is empty
+  ignored:
+    - MPL-2.0
+    - MIT
+
+  # Same as '--license-confidence-level'
+  # Default is 0.9
+  confidenceLevel: 0.9
+
+  # Set list of forbidden licenses
+  # Default is https://github.com/aquasecurity/trivy/blob/164b025413c5fb9c6759491e9a306b46b869be93/pkg/licensing/category.go#L171
+  forbidden:
+    - AGPL-1.0
+    - AGPL-3.0
+
+  # Set list of restricted licenses
+  # Default is https://github.com/aquasecurity/trivy/blob/164b025413c5fb9c6759491e9a306b46b869be93/pkg/licensing/category.go#L199
+  restricted:
+    - AGPL-1.0
+    - AGPL-3.0
+
+  # Set list of reciprocal licenses
+  # Default is https://github.com/aquasecurity/trivy/blob/164b025413c5fb9c6759491e9a306b46b869be93/pkg/licensing/category.go#L238
+  reciprocal:
+    - AGPL-1.0
+    - AGPL-3.0
+
+  # Set list of notice licenses
+  # Default is https://github.com/aquasecurity/trivy/blob/164b025413c5fb9c6759491e9a306b46b869be93/pkg/licensing/category.go#L260
+  notice:
+    - AGPL-1.0
+    - AGPL-3.0
+
+  # Set list of permissive licenses
+  # Default is empty
+  permissive:
+    - AGPL-1.0
+    - AGPL-3.0
+
+  # Set list of unencumbered licenses
+  # Default is https://github.com/aquasecurity/trivy/blob/164b025413c5fb9c6759491e9a306b46b869be93/pkg/licensing/category.go#L334
+  unencumbered:
+    - AGPL-1.0
+    - AGPL-3.0
+
+secret:
+  # Same as '--secret-config'
+  # Default is 'trivy-secret.yaml'
+  config: config/trivy/secret.yaml
+
+rego:
+  # Same as '--trace'
+  # Default is false
+  trace: false
+
+  # Same as '--skip-policy-update'
+  # Default is false
+  skip-policy-update: false
+
+  # Same as '--config-policy'
+  # Default is empty
+  policy:
+    - policy/repository
+    - policy/custom
+    - policy/some-policy.rego
+
+  # Same as '--config-data'
+  # Default is empty
+  data:
+    - data/
+
+  # Same as '--policy-namespaces'
+  # Default is empty
+  namespaces:
+    - opa.examples
+    - users
+
+misconfiguration:
+  # Same as '--include-non-failures'
+  # Default is false
+  include-non-failures: false
+
+  # Same as '--include-deprecated-checks'
+  # Default is false
+  include-deprecated-checks: false
+
+  # Same as '--check-bundle-repository' and '--policy-bundle-repository'
+  # Default is 'ghcr.io/aquasecurity/trivy-checks:0'
+  check-bundle-repository: ghcr.io/aquasecurity/trivy-checks:0
+
+  # Same as '--miconfig-scanners'
+  # Default is all scanners
+  scanners:
+    - dockerfile
+    - terraform
+
+  # helm value override configurations
+  helm:
+    # set individual values
+    set:
+      - securityContext.runAsUser=10001
+
+    # set values with file
+    values:
+      - overrides.yaml
+
+    # set specific values from specific files
+    set-file:
+      - image=dev-overrides.yaml
+
+    # set as string and preserve type
+    set-string:
+      - name=true
+
+    # Available API versions used for Capabilities.APIVersions. This flag is the same as the api-versions flag of the helm template command.
+    api-versions:
+      - policy/v1/PodDisruptionBudget
+      - apps/v1/Deployment
+
+    # Kubernetes version used for Capabilities.KubeVersion. This flag is the same as the kube-version flag of the helm template command.
+    kube-version: v1.21.0
+
+  # terraform tfvars overrrides
+  terraform:
+    vars:
+      - dev-terraform.tfvars
+      - common-terraform.tfvars
+
+    # Same as '--tf-exclude-downloaded-modules'
+    # Default is false
+    exclude-downloaded-modules: false
+
+    # Same as '--cf-params'
+    # Default is false
+  cloudformation:
+    params:
+      - params.json
+
+repository:
+  # Same as '--branch'
+  # Default is empty
+  branch:
+
+  # Same as '--commit'
+  # Default is empty
+  commit:
+
+  # Same as '--tag'
+  # Default is empty
+  tag:
+
+cloud:
+  # whether to force a cache update for every scan
+  update-cache: false
+
+  # how old cached results can be before being invalidated
+  max-cache-age: 24h
+
+  # aws-specific cloud settings
+  aws:
+    # the aws region to use
+    region: us-east-1
+
+    # the aws endpoint to use (not required for general use)
+    endpoint: https://my.custom.aws.endpoint
+
+    # the aws account to use (this will be determined from your environment when not set)
+    account: 123456789012
+
+    # the aws specific services
+    service:
+      - s3
+      - ec2
+
+    # the aws specific arn
+    arn: arn:aws:s3:::example-bucket
+
+    # skip the aws specific services
+    skip-service:
+      - s3
+      - ec2
+
+module:
+  # Same as '--module-dir'
+  # Default is '$HOME/.trivy/modules'
+  dir: $HOME/.trivy/modules
+
+  # Same as '--enable-modules'
+  # Default is empty
+  enable-modules:
+    - trivy-module-spring4shell
+    - trivy-module-wordpress

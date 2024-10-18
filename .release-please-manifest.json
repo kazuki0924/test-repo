@@ -1,0 +1,8 @@
+{
+  "infra/terraform": "0.0.0",
+  "src/subdomain-name1/microservice-name1": "0.1.1",
+  "src/subdomain-name1/microservice-name1/infra/terraform": "0.0.0",
+  ".github": "0.0.0",
+  ".devcontainer": "0.0.0",
+  "infra/docker/app/baseimage": "0.0.0"
+}

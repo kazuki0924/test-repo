@@ -1,0 +1,1 @@
+../../../../../infra/terraform/shared/variables_common.tf

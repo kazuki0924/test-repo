@@ -1,0 +1,92 @@
+### general ###
+.git
+README.md
+LICENSE
+.DS_Store
+coverage
+dist/
+out/
+output/
+outputs/
+test/
+tests/
+docs/
+*.sample
+*.pem
+gitignored/
+
+### terraform ###
+.terraformrc
+.terraform.d/
+.tflint.d/
+
+### terragrunt ###
+terragrunt_rendered.json
+.terragrunt--cache/
+.terragrunt-provider-cache/
+
+### vscode ###
+.vscode/
+
+### devcontainer ###
+.devcontainer/
+
+### node ###
+npm-debug.log
+node_modules/
+.pnpm-store/
+
+### bash ###
+.bash_history
+bash-history/
+
+### windows ###
+*.Zone.Identifier
+
+### misc ###
+TODO.*
+*_old/
+*_bak/
+*_wip/
+tempdir/
+tmpdir/
+temp/
+tmp/
+repl.*
+
+### docker ###
+Dockerfile
+.dockerignore
+
+### github-actions ###
+.github/
+
+### python ###
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.venv/
+venv/
+__pycache__/
+
+### dotfiles ###
+.commitlintrc.yml
+.cspell-dict.txt
+.ecrc
+.editorconfig
+.gitattributes
+.gitignore
+.hadolint.yml
+.markdownlint.yml
+.pre-commit-config.yaml
+.taplo.toml
+.terraformrc
+.tflint.hcl
+.trivyignore
+.yamlfmt.yml
+.yamllint.yml
+biome.jsonc
+cspell.json
+eslint.config.mjs
+ruff.toml
+trivy.yaml

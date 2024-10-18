@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=./.ignore_json_schema.json
+x-workdir-bind-mount:
+  services:
+    build:
+    volumes: &workdir-bind-mount
+      - "../../:${DEVCONTAINER_HOME}/workspace/:delegated" # リポジトリをbind mountする場合
+services:
+  infra-slim:
+    volumes: *workdir-bind-mount
+  infra-sensible:
+    volumes: *workdir-bind-mount
+  infra-edge:
+    volumes: *workdir-bind-mount

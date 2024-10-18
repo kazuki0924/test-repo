@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+# - composite actions:
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+name: create-strategy-matrix
+description: |
+  GitHub ActionsでのCI/CDのためのstrategy matrixをJSON形式で標準出力に出力する
+outputs:
+  STRATEGY_MATRIX:
+    description: |
+      .env.tool-versionsをGITHUB_ENVに出力する
+    value: ${{ steps.create-strategy-matrix.outputs.STRATEGY_MATRIX }}
+runs:
+  using: composite
+  steps:
+    - name: setup python
+      uses: ./.github/actions/setup/python
+    - name: install dependencies
+      shell: bash
+      run: |
+        cd ./scripts/python
+        . ./.venv/bin/activate
+        uv sync
+    - name: create strategy matrix
+      id: create-strategy-matrix
+      shell: bash
+      run: |
+        STRATEGY_MATRIX="$(./scripts/python/github_actions/create_strategy_matrix.py)"
+        echo "STRATEGY_MATRIX=${STRATEGY_MATRIX}" >> "${GITHUB_OUTPUT}"
+

@@ -1,0 +1,105 @@
+// fetched from: https://github.com/rafamadriz/friendly-snippets via python script
+{
+  "FROM": {
+    "prefix": "fs-F",
+    "body": "FROM ${1:ubuntu}",
+    "scope": "dockerfile"
+  },
+  "Label maintainer": {
+    "prefix": "fs-m",
+    "body": "LABEL maintainer=\"${1:name}\"",
+    "scope": "dockerfile"
+  },
+  "RUN": {
+    "prefix": "fs-R",
+    "body": [
+      "RUN ${1:command}"
+    ],
+    "scope": "dockerfile"
+  },
+  "CMD": {
+    "prefix": "fs-C",
+    "body": [
+      "CMD ${1:command}"
+    ],
+    "scope": "dockerfile"
+  },
+  "COPY": {
+    "prefix": "fs-cp",
+    "body": [
+      "COPY ${1:src} ${2:dest}"
+    ],
+    "scope": "dockerfile"
+  },
+  "EXPOSE": {
+    "prefix": "fs-exp",
+    "body": [
+      "EXPOSE ${1:port}"
+    ],
+    "scope": "dockerfile"
+  },
+  "ENV": {
+    "prefix": "fs-env",
+    "body": [
+      "ENV ${1:key} ${2: value}"
+    ],
+    "scope": "dockerfile"
+  },
+  "ADD": {
+    "prefix": "fs-a",
+    "body": [
+      "ADD ${1:src} ${2:dst}"
+    ],
+    "scope": "dockerfile"
+  },
+  "ENTRYPOINT": {
+    "prefix": "fs-ent",
+    "body": "ENTRYPOINT ${1:command}",
+    "scope": "dockerfile"
+  },
+  "VOLUME": {
+    "prefix": "fs-v",
+    "body": "VOLUME [\"${1:path}\"]",
+    "scope": "dockerfile"
+  },
+  "USER": {
+    "prefix": "fs-u",
+    "body": "USER ${1:name}",
+    "scope": "dockerfile"
+  },
+  "WORKDIR": {
+    "prefix": "fs-w",
+    "body": "WORKDIR ${1:name}",
+    "scope": "dockerfile"
+  },
+  "Update Packages": {
+    "prefix": "fs-upd",
+    "body": [
+      "RUN echo \"deb http://archive.ubuntu.com/ubuntu ${1:precise} main universe\" > /etc/apt/sources.list; \\",
+      "apt-get update && apt-get -y upgrade; \\ ",
+      "${2}; \\",
+      "rm -rf /var/lib/apt/lists/*"
+    ],
+    "scope": "dockerfile"
+  },
+  "HEAD": {
+    "prefix": "fs-head",
+    "body": [
+      "# ${1:description}",
+      "#  ",
+      "# VERSION ${2:0.1.0}",
+      "${3}"
+    ],
+    "scope": "dockerfile"
+  },
+  "ONBUILD": {
+    "prefix": "fs-o",
+    "body": "ONBUILD ${1}",
+    "scope": "dockerfile"
+  },
+  "LABEL": {
+    "prefix": "fs-L",
+    "body": "LABEL ${1:label}=\"${2:value}\"",
+    "scope": "dockerfile"
+  }
+}

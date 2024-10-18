@@ -1,0 +1,501 @@
+
+# config written for RUFF_VERSION="0.6.0"
+# ref: https://docs.astral.sh/ruff/settings/
+
+builtins = []
+# set RUFF_CACHE_DIR env var for CI/CD
+cache-dir = ".ruff_cache"
+exclude = [
+  ".bzr",
+  ".direnv",
+  ".eggs",
+  ".git",
+  ".git-rewrite",
+  ".hg",
+  ".mypy_cache",
+  ".nox",
+  ".pants.d",
+  ".pytype",
+  ".ruff_cache",
+  ".svn",
+  ".tox",
+  ".venv",
+  "__pypackages__",
+  "_build",
+  "buck-out",
+  "dist",
+  "node_modules",
+  "venv",
+]
+# extend = null
+extend-exclude = []
+extend-include = []
+# fix                = false
+fix                = true
+fix-only           = false
+force-exclude      = false
+include            = ["*.py", "*.pyi", "*.ipynb", "**/pyproject.toml"]
+indent-width       = 4
+line-length        = 88
+namespace-packages = []
+# set to "github" for GitHub Actions via cli option
+output-format = "full"
+# preview       = false
+preview = true
+# required-version = null
+respect-gitignore = true
+# show-fixes        = false
+show-fixes = true
+src        = [".", "src", "scripts/python"]
+# change this according to the project
+# target-version = "py38"
+target-version = "py312"
+# unsafe-fixes = null
+
+[format]
+# docstring-code-format      = false
+docstring-code-format      = true
+docstring-code-line-length = "dynamic"
+exclude                    = []
+indent-style               = "space"
+# line-ending                = "auto"
+line-ending = "lf"
+# preview                    = false
+preview                   = true
+quote-style               = "double"
+skip-magic-trailing-comma = false
+
+[lint]
+allowed-confusables    = []
+dummy-variable-rgx     = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+exclude                = []
+explicit-preview-rules = false
+extend-fixable         = []
+# extend-ignore              = []
+extend-per-file-ignores = {}
+extend-safe-fixes       = []
+extend-select           = []
+extend-unsafe-fixes     = []
+external                = []
+fixable                 = ["ALL"]
+ignore                  = []
+# ignore-init-module-imports = true
+logger-objects = []
+# preview = false
+preview = true
+# ref: https://docs.astral.sh/ruff/rules/
+select = [
+  # Pyflakes
+  # https://pypi.org/project/pyflakes/
+  "F",
+  # pycodestyle
+  # https://pypi.org/project/pycodestyle/
+  # Error
+  "E",
+  # Warning
+  "W",
+  # mccabe
+  # https://pypi.org/project/mccabe/
+  "C90",
+  # isort
+  # https://pypi.org/project/isort/
+  "I",
+  # pep8-naming
+  # https://pypi.org/project/pep8-naming/
+  "N",
+  # pydocstyle
+  # https://pypi.org/project/pydocstyle/
+  "D",
+  # pyupgrade
+  # https://pypi.org/project/pyupgrade/
+  "UP",
+  # flake8-2020
+  # https://pypi.org/project/flake8-2020/
+  "YTT",
+  # flake8-annotations
+  # https://pypi.org/project/flake8-annotations/
+  "ANN",
+  # flake8-async
+  # https://pypi.org/project/flake8-annotations/
+  "ASYNC",
+  # flake8-bandit
+  # https://pypi.org/project/flake8-bandit/
+  "S",
+  # flake8-blind-except
+  # https://pypi.org/project/flake8-blind-except/
+  "BLE",
+  # flake8-boolean-trap
+  # https://pypi.org/project/flake8-boolean-trap/
+  "FBT",
+  # flake8-bugbear
+  # https://pypi.org/project/flake8-bugbear/
+  "B",
+  # flake8-builtins
+  # https://pypi.org/project/flake8-builtins/
+  "A",
+  # flake8-commas
+  # https://pypi.org/project/flake8-commas/
+  "COM",
+  # flake8-copyright
+  # https://pypi.org/project/flake8-copyright/
+  # "CPY",
+  # flake8-comprehensions
+  # https://pypi.org/project/flake8-comprehensions/
+  "C4",
+  # flake8-datetimez
+  # https://pypi.org/project/flake8-datetimez/
+  "DTZ",
+  # flake8-debugger
+  # https://pypi.org/project/flake8-debugger/
+  "T10",
+  # flake8-django
+  # https://pypi.org/project/flake8-django/
+  "DJ",
+  # flake8-errmsg
+  # https://pypi.org/project/flake8-errmsg/
+  "EM",
+  # flake8-executable
+  # https://pypi.org/project/flake8-executable/
+  "EXE",
+  # flake8-future-annotations
+  # https://pypi.org/project/flake8-future-annotations/
+  "FA",
+  # flake8-implicit-str-concat
+  # https://pypi.org/project/flake8-implicit-str-concat/
+  "ISC",
+  # flake8-import-conventions
+  # https://github.com/joaopalmeiro/flake8-import-conventions
+  "ICN",
+  # flake8-logging
+  # https://pypi.org/project/flake8-logging/
+  "LOG",
+  # flake8-logging-format
+  # https://pypi.org/project/flake8-logging-format/
+  "G",
+  # flake8-no-pep420
+  # https://pypi.org/project/flake8-no-pep420/
+  "INP",
+  # flake8-pie
+  # https://pypi.org/project/flake8-pie/
+  "PIE",
+  # flake8-print
+  # https://pypi.org/project/flake8-print/
+  "T20",
+  # flake8-pyi
+  # https://pypi.org/project/flake8-pyi/
+  "PYI",
+  # flake8-pytest-style
+  # https://pypi.org/project/flake8-pytest-style/
+  "PT",
+  # flake8-quotes
+  # https://pypi.org/project/flake8-quotes/
+  "Q",
+  # flake8-raise
+  # https://pypi.org/project/flake8-raise/
+  "RSE",
+  # flake8-return
+  # https://pypi.org/project/flake8-return/
+  "RET",
+  # flake8-self
+  # https://pypi.org/project/flake8-self/
+  "SLF",
+  # flake8-slots
+  # https://pypi.org/project/flake8-slots/
+  "SLOT",
+  # flake8-simplify
+  # https://pypi.org/project/flake8-simplify/
+  "SIM",
+  # flake8-tidy-imports
+  # https://pypi.org/project/flake8-tidy-imports/
+  "TID",
+  # flake8-type-checking
+  # https://pypi.org/project/flake8-type-checking/
+  "TCH",
+  # flake8-gettext
+  # https://pypi.org/project/flake8-gettext/
+  "INT",
+  # flake8-unused-arguments
+  # https://pypi.org/project/flake8-unused-arguments/
+  "ARG",
+  # flake8-use-pathlib
+  # https://pypi.org/project/flake8-use-pathlib/
+  "PTH",
+  # flake8-todos
+  # https://github.com/orsinium-labs/flake8-todos/
+  "TD",
+  # flake8-fixme
+  # https://github.com/tommilligan/flake8-fixme
+  "FIX",
+  # eradicate
+  # https://pypi.org/project/eradicate/
+  "ERA",
+  # pandas-vet
+  # https://pypi.org/project/pandas-vet/
+  "PD",
+  # pygrep-hooks
+  # https://github.com/pre-commit/pygrep-hooks
+  "PGH",
+  # Pylint
+  # https://pypi.org/project/pylint/
+  # Convention
+  "PLC",
+  # Error
+  "PLE",
+  # Refactor
+  "PLR",
+  # Warning
+  "PLW",
+  # tryceratops
+  # https://pypi.org/project/tryceratops/
+  "TRY",
+  # flynt
+  # https://pypi.org/project/flynt/
+  "FLY",
+  # NumPy-specific rules
+  # https://pypi.org/project/numpy/
+  "NPY",
+  # FastAPI
+  # https://pypi.org/project/fastapi/
+  "FAST",
+  # Airflow
+  # https://pypi.org/project/apache-airflow/
+  "AIR",
+  # Perflint
+  # https://pypi.org/project/perflint/
+  "PERF",
+  # refurb
+  # https://pypi.org/project/refurb/
+  "FURB",
+  # pydoclint
+  # https://pypi.org/project/pydoclint/
+  "DOC",
+  # Ruff-specific rules
+  # https://pypi.org/project/ruff/
+  "RUF",
+]
+task-tags = ["FIXME", "TODO", "TBD"]
+typing-modules = []
+unfixable = []
+
+[lint.per-file-ignores]
+"__init__.py" = [
+  "D104", # allow missing docstring in __init__.py
+]
+"**/tests/*.py" = [
+  "S101",    # allow asserts in tests
+  "S404",    # allow subprocess
+  "PLR0913", # allow many arguments for tests
+  "PLR0917", # allow many positional arguments for tests
+  "PLR6301", # allow for grouping test cases
+]
+
+[lint.flake8-annotations]
+allow-star-arg-any      = false
+ignore-fully-untyped    = false
+mypy-init-return        = false
+suppress-dummy-args     = false
+suppress-none-returning = false
+
+[lint.flake8-bandit]
+check-typed-exception          = false
+hardcoded-tmp-directory        = ["/dev/shm", "/tmp", "/var/tmp"]
+hardcoded-tmp-directory-extend = []
+
+[lint.flake8-boolean-trap]
+extend-allowed-calls = []
+
+[lint.flake8-bugbear]
+extend-immutable-calls = []
+
+[lint.flake8-builtins]
+builtins-allowed-modules = []
+builtins-ignorelist      = []
+
+[lint.flake8-comprehensions]
+allow-dict-calls-with-keyword-arguments = false
+
+[lint.flake8-copyright]
+# author = null
+min-file-size = 0
+notice-rgx    = "(?i)Copyright\\s+((?:\\(C\\)|©)\\s+)?\\d{4}((-|,\\s)\\d{4})*"
+
+[lint.flake8-errmsg]
+max-string-length = 0
+
+[lint.flake8-gettext]
+extend-function-names = []
+function-names        = ["_", "gettext", "ngettext"]
+
+[lint.flake8-implicit-str-concat]
+allow-multiline = true
+
+[lint.flake8-import-conventions]
+banned-aliases = {}
+banned-from    = []
+extend-aliases = {}
+
+[lint.flake8-import-conventions.aliases]
+"altair"                = "alt"
+"matplotlib"            = "mpl"
+"matplotlib.pyplot"     = "plt"
+"numpy"                 = "np"
+"pandas"                = "pd"
+"seaborn"               = "sns"
+"tensorflow"            = "tf"
+"tkinter"               = "tk"
+"holoviews"             = "hv"
+"panel"                 = "pn"
+"plotly.express"        = "px"
+"polars"                = "pl"
+"pyarrow"               = "pa"
+"xml.etree.ElementTree" = "ET"
+
+[lint.flake8-pytest-style]
+fixture-parentheses = false
+mark-parentheses = false
+parametrize-names-type = "tuple"
+parametrize-values-row-type = "tuple"
+parametrize-values-type = "list"
+raises-extend-require-match-for = []
+raises-require-match-for = [
+  "BaseException",
+  "EnvironmentError",
+  "Exception",
+  "IOError",
+  "OSError",
+  "ValueError",
+  "socket.error",
+]
+
+[lint.flake8-quotes]
+avoid-escape     = true
+docstring-quotes = "double"
+inline-quotes    = "double"
+multiline-quotes = "double"
+
+[lint.flake8-self]
+extend-ignore-names = []
+ignore-names = [
+  "_asdict",
+  "_field_defaults",
+  "_fields",
+  "_make",
+  "_name_",
+  "_replace",
+  "_value_",
+]
+
+[lint.flake8-tidy-imports]
+ban-relative-imports        = "parents"
+banned-api                  = {}
+banned-module-level-imports = []
+
+[lint.flake8-type-checking]
+exempt-modules    = ["typing"]
+quote-annotations = false
+# runtime-evaluated-base-classes = []
+runtime-evaluated-base-classes = [
+  "pydantic.BaseModel",
+  "sqlalchemy.orm.DeclarativeBase",
+]
+# runtime-evaluated-decorators = []
+runtime-evaluated-decorators = ["pydantic.validate_call", "attrs.define"]
+# strict                       = false
+strict = true
+
+[lint.flake8-unused-arguments]
+ignore-variadic-names = false
+
+# isort
+[lint.isort]
+case-sensitive = false
+classes = []
+combine-as-imports = false
+constants = []
+default-section = "third-party"
+detect-same-package = true
+extra-standard-library = []
+force-single-line = false
+force-sort-within-sections = false
+force-to-top = []
+force-wrap-aliases = false
+forced-separate = []
+from-first = false
+known-first-party = []
+known-local-folder = []
+known-third-party = []
+length-sort = false
+length-sort-straight = false
+lines-after-imports = -1
+lines-between-types = 0
+no-lines-before = []
+no-sections = false
+order-by-type = true
+relative-imports-order = "furthest-to-closest"
+required-imports = []
+section-order = [
+  "future",
+  "standard-library",
+  "third-party",
+  "first-party",
+  "local-folder",
+]
+sections = {}
+single-line-exclusions = []
+split-on-trailing-comma = true
+variables = []
+
+[lint.mccabe]
+max-complexity = 10
+
+[lint.pep8-naming]
+classmethod-decorators = []
+extend-ignore-names = []
+ignore-names = [
+  "asyncSetUp",
+  "asyncTearDown",
+  "failureException",
+  "longMessage",
+  "maxDiff",
+  "setUp",
+  "setUpClass",
+  "setUpModule",
+  "setUpTestData",
+  "tearDown",
+  "tearDownClass",
+  "tearDownModule",
+]
+staticmethod-decorators = []
+
+[lint.pycodestyle]
+ignore-overlong-task-comments = false
+# max-doc-length = null
+# max-line-length = null
+
+[lint.pydocstyle]
+# convention = null
+convention          = "pep257"
+ignore-decorators   = []
+property-decorators = []
+
+[lint.pyflakes]
+extend-generics = []
+
+[lint.pylint]
+allow-dunder-method-names = []
+allow-magic-value-types   = ["bytes", "str"]
+max-args                  = 5
+max-bool-expr             = 5
+max-branches              = 12
+max-locals                = 15
+max-nested-blocks         = 5
+max-positional-args       = 5
+max-public-methods        = 20
+max-returns               = 6
+max-statements            = 50
+
+[lint.pyupgrade]
+keep-runtime-typing = false
+
+[lint.ruff]
+parenthesize-tuple-in-subscript = false

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+name: ci-ruff-check
+description: |
+  ruff check
+  pythonのリントを行う
+runs:
+  using: composite
+  steps:
+    - name: setup ruff
+      uses: ./.github/actions/setup/python/ruff
+    - name: ruff check
+      shell: bash
+      run: ruff check .

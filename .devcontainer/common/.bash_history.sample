@@ -1,0 +1,41 @@
+ls -la
+cd -
+git add --all && git commit -m "feat: temp - rebase fixup later" --no-verify && git push
+git rebase --interactive HEAD~10
+git push --force-with-lease --force-if-includes
+git reset --soft HEAD~1
+git add --all && git commit --amend --no-edit && git push --force-with-lease --force-if-includes
+git reset --hard origin/$(git branch --show-current)
+git switch -
+terraform console
+terraform init
+terraform test -verbose
+terraform test -verbose -json
+terraform test -verbose -filter=tests/unit.tftest.hcl
+terraform test -verbose -filter=tests/integration.tftest.hcl
+terragrunt init
+terragrunt plan
+terragrunt apply
+gh auth login
+docker exec -it devcontainers-infra-edge /bin/bash
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq) && docker volume rm $(docker volume ls -q)
+cd $HOME/workspace/infra/terraform/github/environments/dev/repository
+cd $HOME/workspace/infra/terraform/github/modules/repository
+cd $HOME/workspace/infra/terraform/aws/environments/dev/app
+cd $HOME/workspace/infra/terraform/aws/modules/app
+cd $HOME/workspace/infra/terraform/aws/environments/dev/init
+cd $HOME/workspace/infra/terraform/aws/modules/init
+release-please bootstrap --token=$(gh auth token) --repo-url=$(git remote get-url origin | sed -E 's/.*[:/]([^/]+\/[^/.]+)(\.git)?/\1/')
+release-please github-release --token=$(gh auth token) --repo-url=$(git remote get-url origin | sed -E 's/.*[:/]([^/]+\/[^/.]+)(\.git)?/\1/') --dry-run
+git show origin/release-please--branches--$(git remote show origin | grep 'HEAD branch' | awk '{print $NF}'):.release-please-manifest.json | jq '.["src/subdomain-name1/microservice-name1"]'
+gh api -H "Accept: application/vnd.github+json" -H "X-GitHub-Api-Version: 2022-11-28" /repos/hashicorp/terraform-provider-external/tags
+uv add --script ./scripts/python/aws/dotenv_to_container_def_envs_json.py 'pydantic>=2.9.0'
+bash scripts/bash/terraform/run_all.sh -i
+bash scripts/bash/terraform/run_all.sh -U
+bash scripts/bash/terraform/run_all.sh -u
+bash scripts/bash/aws/iam_oidc_provider_and_role_for_github_action.sh --prefix=xev-vpp-evems-dev
+gh variable list -R $GITHUB_OWNER/$GITHUB_REPO --json name -q '.[] | .name' | xargs -I {} sh -c 'gh variable delete {} -R $GITHUB_OWNER/$GITHUB_REPO || true'
+gh variable list -R $GITHUB_OWNER/$GITHUB_REPO --env dev --json name -q '.[] | .name' | xargs -I {} sh -c 'gh variable delete {} -R $GITHUB_OWNER/$GITHUB_REPO --env dev || true'
+gh variable list -R $GITHUB_OWNER/$GITHUB_REPO --env test --json name -q '.[] | .name' | xargs -I {} sh -c 'gh variable delete {} -R $GITHUB_OWNER/$GITHUB_REPO --env test || true'
+gh variable list -R $GITHUB_OWNER/$GITHUB_REPO --env stg --json name -q '.[] | .name' | xargs -I {} sh -c 'gh variable delete {} -R $GITHUB_OWNER/$GITHUB_REPO --env stg || true'
+gh variable list -R $GITHUB_OWNER/$GITHUB_REPO --env prod --json name -q '.[] | .name' | xargs -I {} sh -c 'gh variable delete {} -R $GITHUB_OWNER/$GITHUB_REPO --env prod || true'

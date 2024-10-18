@@ -1,0 +1,23 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+name: setup-ruff
+description: |
+  ruffのセットアップを行う
+runs:
+  using: composite
+  steps:
+    - name: setup python
+      uses: ./.github/actions/setup/python
+    - name: install ruff
+      shell: bash
+      run: "pip install ruff==${RUFF_VERSION}"
+    - name: cache ruff
+      uses: actions/cache@v4.0.2
+      with:
+        path: "${{ github.workspace }}/.ruff_cache"
+        key: "${{ runner.os }}-\
+          ruff-\
+          cache-\
+          ${{ github.sha }}"
+        restore-keys: "${{ runner.os }}-\
+          ruff-\
+          cache-"

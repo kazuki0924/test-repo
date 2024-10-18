@@ -1,0 +1,322 @@
+# eslint-disable yml/key-name-casing
+# update with scripts/bash/devcontainer/update_compose_build_args.sh
+# ref: https://docs.docker.com/reference/compose-file/version-and-name/
+name: devcontainers
+x-defaults:
+  services:
+    build:
+      args:
+        tool-versions: &services-build-args-tool-versions
+          BASH_VERSION: "${BASH_VERSION}"
+          GIT_VERSION: "${GIT_VERSION}"
+          PANDOC_VERSION: "${PANDOC_VERSION}"
+          MAKE_VERSION: "${MAKE_VERSION}"
+          PYTHON_VERSION: "${PYTHON_VERSION}"
+          PYENV_INSTALL_VERSION: "${PYENV_INSTALL_VERSION}"
+          PIP_VERSION: "${PIP_VERSION}"
+          PIPX_VERSION: "${PIPX_VERSION}"
+          UV_VERSION: "${UV_VERSION}"
+          RYE_VERSION: "${RYE_VERSION}"
+          POETRY_VERSION: "${POETRY_VERSION}"
+          PYTHON_SETUP_TOOLS_VERSION: "${PYTHON_SETUP_TOOLS_VERSION}"
+          WHEEL_VERSION: "${WHEEL_VERSION}"
+          ARGCOMPLETE_VERSION: "${ARGCOMPLETE_VERSION}"
+          GO_VERSION: "${GO_VERSION}"
+          RUSTUP_VERSION: "${RUSTUP_VERSION}"
+          RUST_VERSION: "${RUST_VERSION}"
+          CARGO_VERSION: "${CARGO_VERSION}"
+          NODE_VERSION: "${NODE_VERSION}"
+          FNM_VERSION: "${FNM_VERSION}"
+          NPM_VERSION: "${NPM_VERSION}"
+          PNPM_VERSION: "${PNPM_VERSION}"
+          JQ_VERSION: "${JQ_VERSION}"
+          YQ_VERSION: "${YQ_VERSION}"
+          FD_VERSION: "${FD_VERSION}"
+          RIPGREP_VERSION: "${RIPGREP_VERSION}"
+          SD_VERSION: "${SD_VERSION}"
+          COSIGN_VERSION: "${COSIGN_VERSION}"
+          SLSA_VERIFIER_VERSION: "${SLSA_VERIFIER_VERSION}"
+          SOPS_VERSION: "${SOPS_VERSION}"
+          GOSU_VERSION: "${GOSU_VERSION}"
+          TERRAFORM_VERSION: "${TERRAFORM_VERSION}"
+          TERRAGRUNT_VERSION: "${TERRAGRUNT_VERSION}"
+          TENV_VERSION: "${TENV_VERSION}"
+          TFLINT_VERSION: "${TFLINT_VERSION}"
+          HCLFMT_VERSION: "${HCLFMT_VERSION}"
+          HCLEDIT_VERSION: "${HCLEDIT_VERSION}"
+          TERRAFORM_DOCS_VERSION: "${TERRAFORM_DOCS_VERSION}"
+          TFUPDATE_VERSION: "${TFUPDATE_VERSION}"
+          TF_SUMMARIZE_VERSION: "${TF_SUMMARIZE_VERSION}"
+          INFRACOST_VERSION: "${INFRACOST_VERSION}"
+          INFRAMAP_VERSION: "${INFRAMAP_VERSION}"
+          ANSIBLE_VERSION: "${ANSIBLE_VERSION}"
+          ANSIBLE_CORE_VERSION: "${ANSIBLE_CORE_VERSION}"
+          ANSIBLE_LINT_VERSION: "${ANSIBLE_LINT_VERSION}"
+          TRIVY_VERSION: "${TRIVY_VERSION}"
+          CHECKOV_VERSION: "${CHECKOV_VERSION}"
+          TERRASCAN_VERSION: "${TERRASCAN_VERSION}"
+          ECSPRESSO_VERSION: "${ECSPRESSO_VERSION}"
+          GO_JSONNET_VERSION: "${GO_JSONNET_VERSION}"
+          SHELLCHECK_VERSION: "${SHELLCHECK_VERSION}"
+          SHFMT_VERSION: "${SHFMT_VERSION}"
+          BATS_VERSION: "${BATS_VERSION}"
+          BATS_SUPPORT_VERSION: "${BATS_SUPPORT_VERSION}"
+          BATS_ASSERT_VERSION: "${BATS_ASSERT_VERSION}"
+          BATS_FILE_VERSION: "${BATS_FILE_VERSION}"
+          BATS_MOCK_VERSION: "${BATS_MOCK_VERSION}"
+          HADOLINT_VERSION: "${HADOLINT_VERSION}"
+          ESLINT_VERSION: "${ESLINT_VERSION}"
+          ESLINT_PLUGIN_YML_VERSION: "${ESLINT_PLUGIN_YML_VERSION}"
+          BIOME_VERSION: "${BIOME_VERSION}"
+          TAPLO_VERSION: "${TAPLO_VERSION}"
+          CHECKMAKE_VERSION: "${CHECKMAKE_VERSION}"
+          EDITORCONFIG_CHECKER_VERSION: "${EDITORCONFIG_CHECKER_VERSION}"
+          DOTENV_LINTER_VERSION: "${DOTENV_LINTER_VERSION}"
+          YAMLFMT_VERSION: "${YAMLFMT_VERSION}"
+          YAMLLINT_VERSION: "${YAMLLINT_VERSION}"
+          ACTIONLINT_VERSION: "${ACTIONLINT_VERSION}"
+          ACTION_VALIDATOR_VERSION: "${ACTION_VALIDATOR_VERSION}"
+          CHECK_JSONSCHEMA_VERSION: "${CHECK_JSONSCHEMA_VERSION}"
+          MARKDOWNLINT_CLI2_VERSION: "${MARKDOWNLINT_CLI2_VERSION}"
+          SQLFLUFF_VERSION: "${SQLFLUFF_VERSION}"
+          DBMATE_VERSION: "${DBMATE_VERSION}"
+          PARLIAMENT_VERSION: "${PARLIAMENT_VERSION}"
+          PROSELINT_VERSION: "${PROSELINT_VERSION}"
+          CSPELL_VERSION: "${CSPELL_VERSION}"
+          TEXTLINT_VERSION: "${TEXTLINT_VERSION}"
+          ALEX_VERSION: "${ALEX_VERSION}"
+          WRITE_GOOD_VERSION: "${WRITE_GOOD_VERSION}"
+          AWS_CLI_VERSION: "${AWS_CLI_VERSION}"
+          GH_VERSION: "${GH_VERSION}"
+          ACT_VERSION: "${ACT_VERSION}"
+          REVIEWDOG_VERSION: "${REVIEWDOG_VERSION}"
+          MOBY_VERSION: "${MOBY_VERSION}"
+          DOCKER_CLI_VERSION: "${DOCKER_CLI_VERSION}"
+          DOCKER_COMPOSE_VERSION: "${DOCKER_COMPOSE_VERSION}"
+          DOCKER_BUILDX_VERSION: "${DOCKER_BUILDX_VERSION}"
+          CONTAINERD_VERSION: "${CONTAINERD_VERSION}"
+          BUILDKIT_VERSION: "${BUILDKIT_VERSION}"
+          PYTEST_VERSION: "${PYTEST_VERSION}"
+          RUFF_VERSION: "${RUFF_VERSION}"
+          PYLINT_VERSION: "${PYLINT_VERSION}"
+          FLAKE8_VERSION: "${FLAKE8_VERSION}"
+          BLACK_VERSION: "${BLACK_VERSION}"
+          ISORT_VERSION: "${ISORT_VERSION}"
+          YAPF_VERSION: "${YAPF_VERSION}"
+          MYPY_VERSION: "${MYPY_VERSION}"
+          PYRIGHT_VERSION: "${PYRIGHT_VERSION}"
+          PERFLINT_VERSION: "${PERFLINT_VERSION}"
+          BANDIT_VERSION: "${BANDIT_VERSION}"
+          PRE_COMMIT_VERSION: "${PRE_COMMIT_VERSION}"
+          COMMITLINT_VERSION: "${COMMITLINT_VERSION}"
+          COMMITLINT_CONFIG_CONVENTIONAL_VERSION: "${COMMITLINT_CONFIG_CONVENTIONAL_VERSION}"
+          COMMITIZEN_VERSION: "${COMMITIZEN_VERSION}"
+          RELEASE_PLEASE_VERSION: "${RELEASE_PLEASE_VERSION}"
+          SEMANTIC_RELEASE_VERSION: "${SEMANTIC_RELEASE_VERSION}"
+          DIRENV_VERSION: "${DIRENV_VERSION}"
+          DEVCONTAINERS_CLI_VERSION: "${DEVCONTAINERS_CLI_VERSION}"
+          STARSHIP_VERSION: "${STARSHIP_VERSION}"
+          ATUIN_VERSION: "${ATUIN_VERSION}"
+          MCFLY_VERSION: "${MCFLY_VERSION}"
+          ZOXIDE_VERSION: "${ZOXIDE_VERSION}"
+          BLE_SH_VERSION: "${BLE_SH_VERSION}"
+          NNN_VERSION: "${NNN_VERSION}"
+          TRASH_CLI_VERSION: "${TRASH_CLI_VERSION}"
+          ACTIONS_SETUP_PYTHON_VERSION: "${ACTIONS_SETUP_PYTHON_VERSION}"
+          ACTIONS_CACHE_VERSION: "${ACTIONS_CACHE_VERSION}"
+          ACTIONS_CONFIGURE_AWS_CREDENTIALS_VERSION: "${ACTIONS_CONFIGURE_AWS_CREDENTIALS_VERSION}"
+          ACTIONS_AMAZON_ECR_LOGIN_VERSION: "${ACTIONS_AMAZON_ECR_LOGIN_VERSION}"
+          ACTIONS_DOCKER_SETUP_BUILDX_VERSION: "${ACTIONS_DOCKER_SETUP_BUILDX_VERSION}"
+          ACTIONS_DOCKER_METADATA_VERSION: "${ACTIONS_DOCKER_METADATA_VERSION}"
+          ACTIONS_DOCKER_BUILD_PUSH_VERSION: "${ACTIONS_DOCKER_BUILD_PUSH_VERSION}"
+          ACTIONS_CREATE_GITHUB_APP_TOKEN: "${ACTIONS_CREATE_GITHUB_APP_TOKEN}"
+          TERRAFORM_PROVIDER_AWS_VERSION: "${TERRAFORM_PROVIDER_AWS_VERSION}"
+          TERRAFORM_PROVIDER_GITHUB_VERSION: "${TERRAFORM_PROVIDER_GITHUB_VERSION}"
+          TERRAFORM_PROVIDER_LOCAL_VERSION: "${TERRAFORM_PROVIDER_LOCAL_VERSION}"
+          TERRAFORM_PROVIDER_NULL_VERSION: "${TERRAFORM_PROVIDER_NULL_VERSION}"
+          TERRAFORM_PROVIDER_RANDOM_VERSION: "${TERRAFORM_PROVIDER_RANDOM_VERSION}"
+          TERRAFORM_PROVIDER_EXTERNAL_VERSION: "${TERRAFORM_PROVIDER_EXTERNAL_VERSION}"
+        id: &services-build-arg-id
+          DEVCONTAINER_UID: "${DEVCONTAINER_UID}"
+          DEVCONTAINER_GID: "${DEVCONTAINER_GID}"
+          DEVCONTAINER_USERNAME: "${DEVCONTAINER_USERNAME}"
+          DEVCONTAINER_HOME: "${DEVCONTAINER_HOME}"
+      cache_to: &services-build-cache-to
+        - type=local,dest=../common/.cache/infra-edge,mode=max,tag=cache
+      cache_from: &services-build-cache-from
+        - type=local,src=./.devcontainer/common/.cache/infra-edge,mode=max,tag=cache
+    # !IMPORTANT: for performance gain, we clone the repository to named volumes to use in devcontainers
+    # make sure to update the following files when modifying volumes:
+    # .devcontainer/common/scripts/lifecycle/on_create_command.sh
+    # ref: https://docs.docker.com/engine/storage/bind-mounts/
+    volumes: &services-volumes
+      # [bind mount to repository in the host machine]
+      # !CAUTION: all .gitignored files in the named volume will be deleted when wiping out the volumes unless they are bind mounted to the host machine here
+      # !CAUTION: any changes to the repository in the host machine will not be reflected in the named volume and vise versa unless it is pushed, then pulled
+      # - e.g.
+      #   - editing on_create_command.sh in the named volume will not be reflected in the repository in the host machine, unless it is pushed from the named volume and pulled in the host machine
+      #   - editing on_create_command.sh in the host machine will not be reflected in the repository in the named volume, unless it is pushed from the host machine and pulled in the named volume
+      # required for git clone
+      # errors if placed within git version controlled directories
+      # must push from the host machine and pull in the named volume to reflect changes
+      - "${HOST_REPO_PATH}/.devcontainer/common/scripts/lifecycle/:${DEVCONTAINER_HOME}/scripts/lifecycle/:cached"
+      # [.gitignored files]
+      # keep the gitignored files in the named volume here and symlink them to prevent gitignored files from being deleted when wiping out the volumes
+      - "${HOST_REPO_PATH}/.devcontainer/infra-personal/:${DEVCONTAINER_HOME}/workspace/.devcontainer/infra-personal/:cached"
+      - "${HOST_REPO_PATH}/repl.sh:${DEVCONTAINER_HOME}/workspace/repl.sh:cached"
+      - "${HOST_REPO_PATH}/repl.py:${DEVCONTAINER_HOME}/workspace/repl.py:cached"
+      # bind mount to host's files(for macOS, Linux, WSL2)
+      # [aws]
+      - "~/.aws:${DEVCONTAINER_HOME}/.aws:cached"
+      # [git/GitHub]
+      - "~/.ssh:${DEVCONTAINER_HOME}/.ssh:cached"
+      - "~/.config/gh:${DEVCONTAINER_HOME}/.config/gh:cached"
+      - "~/.gitconfig:${DEVCONTAINER_HOME}/.gitconfig:cached"
+      # [docker]
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      # [targeted named volumes]
+      - "bash-history:${DEVCONTAINER_HOME}/workspace/bash-history:delegated"
+      - "node-modules:${DEVCONTAINER_HOME}/workspace/node_modules/:delegated"
+      - "pnpm-store:${DEVCONTAINER_HOME}/workspace/.pnpm-store/:delegated"
+      - "venv:${DEVCONTAINER_HOME}/workspace/scripts/python/.venv/:delegated"
+      - "uv-cache:${DEVCONTAINER_HOME}/workspace/.uv-cache/:delegated"
+      - "ruff-cache:${DEVCONTAINER_HOME}/workspace/.ruff_cache/:delegated"
+      - "pycache:${DEVCONTAINER_HOME}/workspace/__pycache__/:delegated"
+      - "pytest-cache:${DEVCONTAINER_HOME}/workspace/.pytest_cache/:delegated"
+      - "mypy-cache:${DEVCONTAINER_HOME}/workspace/.mypy_cache/:delegated"
+      - "terragrunt-cache:${DEVCONTAINER_HOME}/workspace/.terragrunt-cache/:delegated"
+      - "terragrunt-provider-cache:${DEVCONTAINER_HOME}/workspace/.terragrunt-provider-cache/:delegated"
+      - "terraform-d:${DEVCONTAINER_HOME}/workspace/.terraform.d/:delegated"
+      - "tflint-d:${DEVCONTAINER_HOME}/workspace/.tflint.d/:delegated"
+      - "zoxide-db:${DEVCONTAINER_HOME}/.local/share/zoxide/:delegated"
+      - "workspace:${DEVCONTAINER_HOME}/workspace/:delegated"
+    env_file: &services-env-file
+      - .env.devcontainer
+    environment: &services-environment
+      GIT_REMOTE_ORIGIN: "${GIT_REMOTE_ORIGIN}"
+      MAIN_BRANCH: "${MAIN_BRANCH}"
+      DEVCONTAINER_WORK_BRANCH: "${DEVCONTAINER_WORK_BRANCH}"
+    command: &services-command /bin/sh -c "sleep infinity"
+  volumes: &volumes
+    bash-history: {}
+    node-modules: {}
+    pnpm-store: {}
+    venv: {}
+    uv-cache: {}
+    ruff-cache: {}
+    pycache: {}
+    pytest-cache: {}
+    mypy-cache: {}
+    terragrunt-cache: {}
+    terragrunt-provider-cache: {}
+    terraform-d: {}
+    tflint-d: {}
+    zoxide-db: {}
+    workspace: {}
+# refs:
+# - https://docs.docker.com/reference/compose-file/services/
+# - https://docs.docker.com/reference/compose-file/build/
+# - https://docs.docker.com/reference/compose-file/networks/
+# - https://docs.docker.com/reference/compose-file/volumes/
+volumes: *volumes
+services:
+  infra-slim:
+    container_name: infra-slim
+    user: "${DEVCONTAINER_USERNAME}"
+    image: devcontainer/infra-slim:latest
+    build:
+      dockerfile: Dockerfile
+      context: ../common
+      tags:
+        - devcontainer/infra-slim:latest
+      args:
+        DEVCONTAINER_VERSION: slim
+        <<:
+          - *services-build-args-tool-versions
+          - *services-build-arg-id
+      cache_from: *services-build-cache-from
+    volumes: *services-volumes
+    privileged: true
+    env_file: *services-env-file
+    environment:
+      RUN_INFRATEST: false
+      <<: *services-environment
+    tty: true
+    command: *services-command
+  infra-sensible:
+    container_name: infra-sensible
+    user: "${DEVCONTAINER_USERNAME}"
+    image: devcontainer/infra-sensible:latest
+    build:
+      dockerfile: Dockerfile
+      # bind mount to repository in the host machine(which is older than the repository cloned in the named volume)
+      # note that any changes to the repository in the host machine will not be reflected in the named volume unless it is pushed
+      context: ../common
+      tags:
+        - devcontainer/infra-sensible:latest
+      args:
+        DEVCONTAINER_VERSION: sensible
+        <<:
+          - *services-build-args-tool-versions
+          - *services-build-arg-id
+      cache_from: *services-build-cache-from
+    volumes: *services-volumes
+    privileged: true
+    env_file: *services-env-file
+    environment:
+      RUN_INFRATEST: false
+      <<: *services-environment
+    tty: true
+    command: *services-command
+  infra-edge:
+    container_name: infra-edge
+    user: "${DEVCONTAINER_USERNAME}"
+    image: devcontainer/infra-edge:latest
+    build:
+      dockerfile: Dockerfile
+      context: ../common
+      tags:
+        - devcontainer/infra-edge:latest
+      args:
+        DEVCONTAINER_VERSION: edge
+        <<:
+          - *services-build-args-tool-versions
+          - *services-build-arg-id
+      cache_from: *services-build-cache-from
+    volumes: *services-volumes
+    privileged: true
+    env_file: *services-env-file
+    environment:
+      RUN_INFRATEST: true
+      <<: *services-environment
+    tty: true
+    command: *services-command
+  infra-poc:
+    container_name: infra-poc
+    user: root
+    image: devcontainer/infra-slim:latest
+    volumes: *services-volumes
+    privileged: true
+    env_file: *services-env-file
+    environment: *services-environment
+    tty: true
+    command: *services-command
+  pre-build-devcontainers-infra:
+    container_name: pre-build-devcontainers
+    user: "${DEVCONTAINER_USERNAME}"
+    image: devcontainer/infra-edge:latest
+    build:
+      dockerfile: Dockerfile
+      context: .
+      tags:
+        - devcontainer/infra-edge:latest
+      args:
+        DEVCONTAINER_VERSION: edge
+        <<:
+          - *services-build-args-tool-versions
+          - *services-build-arg-id
+      cache_to: *services-build-cache-to
+      cache_from: *services-build-cache-from
+    privileged: true
+    env_file: *services-env-file
+    environment: *services-environment

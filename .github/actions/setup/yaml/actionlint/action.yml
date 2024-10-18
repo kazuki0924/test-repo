@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+name: setup-actionlint
+description: |
+  actionlintのセットアップを行う
+runs:
+  using: composite
+  steps:
+    - name: source .env.tool-versions
+      uses: ./.github/actions/setup/common/source-env-tool-versions
+    - name: cache actionlint binary
+      id: cache_actionlint_binary
+      uses: actions/cache@v4.1.0
+      with:
+        path: /usr/local/bin/actionlint
+        key: "${{ runner.os }}-\
+          actionlint-\
+          binary-\
+          cache-\
+          ${{ env.ACTIONLINT_VERSION }}"
+    - name: install actionlint
+      if: >-
+        ${{ steps.cache_actionlint_binary.outputs.cache-hit != 'true' }}
+      shell: bash
+      env:
+        ACTIONLINT_VERSION: "${{ env.ACTIONLINT_VERSION }}"
+      run: |
+        BINARY_NAME="actionlint"
+        REPOSITORY_NAME="rhysd/actionlint"
+        TAG_NAME="v${ACTIONLINT_VERSION}"
+        TARGETARCH="$(dpkg --print-architecture)"
+        RELEASE_FILE_NAME_WO_EXTENSION="${BINARY_NAME}_${ACTIONLINT_VERSION}_linux_${TARGETARCH}"
+        RELEASE_FILE_NAME="${RELEASE_FILE_NAME_WO_EXTENSION}.tar.gz"
+        wget --progress=dot:giga "https://github.com/${REPOSITORY_NAME}/releases/download/${TAG_NAME}/${RELEASE_FILE_NAME}"
+        && tar -zxvf "${RELEASE_FILE_NAME}"
+        && install -v -m 0755 "${BINARY_NAME}" /usr/local/bin

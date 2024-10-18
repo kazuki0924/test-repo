@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+# - composite actions:
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+name: source-env-tool-versions
+description: |
+  .env.tool-versionsをGITHUB_ENVに出力する
+runs:
+  using: composite
+  steps:
+    - name: append .env.tool-versions to GITHUB_ENV
+      shell: bash
+      run: |
+        sed 's/export \([^=]*\)="\(.*\)"/\1=\2/' .env.tool-versions>>"${GITHUB_ENV}"

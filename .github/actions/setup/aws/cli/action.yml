@@ -1,0 +1,59 @@
+# eslint-disable yml/block-mapping-colon-indicator-newline
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+#   - composite actions:
+#     - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#     - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+#   - aws cli v2
+#     - https://github.com/aws/aws-cli/tree/v2
+name: setup-aws-cli
+description: |
+  aws-cli v2のセットアップを行う
+inputs:
+  WORKDIR:
+    description: |
+      作業ディレクトリ
+    required: false
+    default: /tempdir
+runs:
+  using: composite
+  steps:
+    - name: source .env.tool-versions
+      uses: ./.github/actions/setup/common/source-env-tool-versions
+    - name: set env vars
+      shell: bash
+      id: set-env-vars
+      run: |
+        RELEASE_FILE_NAME_WO_EXTENSION="awscli-exe-linux-$(uname -m)-${AWS_CLI_VERSION}"
+        RELEASE_FILE_NAME="${RELEASE_FILE_NAME_WO_EXTENSION}.zip"
+        echo "RELEASE_FILE_NAME=${RELEASE_FILE_NAME}" >> "${GITHUB_ENV}"
+    - name: cache aws-cli installer
+      id: aws-cli
+      uses: "actions/cache@v${AWS_CLI_CACHE_VERSION}"
+      with:
+        path: "${{ inputs.WORKDIR }}/aws"
+        key:
+          "${{ runner.os }}-\
+          aws-\
+          installer-\
+          cache-\
+          ${{ env.AWS_CLI_VERSION }}"
+    - name: cache hit
+      if: ${{ steps.aws-cli.outputs.cache-hit == 'true' }}
+      shell: bash
+      run: |
+        echo "cache hit: skipping download...."
+    - name: download aws-cli
+      if: ${{ steps.aws-cli.outputs.cache-hit != 'true' }}
+      shell: bash
+      working-directory: ${{ inputs.WORKDIR }}
+      env:
+        AWS_CLI_VERSION: ${{ env.AWS_CLI_VERSION }}
+      run: |
+        wget --progress=dot:giga "https://awscli.amazonaws.com/${RELEASE_FILE_NAME}"
+        unzip "${RELEASE_FILE_NAME}"
+    - name: install aws-cli
+      shell: bash
+      working-directory: ${{ inputs.WORKDIR }}
+      run: |
+        ./aws/install

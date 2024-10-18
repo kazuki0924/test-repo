@@ -1,0 +1,283 @@
+# """Tests for dotenv_to_container_def_envs_json.py."""
+
+# import json
+# import sys
+# from pathlib import Path
+# # from typing import Any
+# # from unittest.mock import MagicMock
+
+# import pytest
+# import pytest_mock
+# from pytest_mock import MockerFixture
+
+# from scripts.python.aws.dotenv_to_container_def_envs_json import (
+#     dotenv_to_tf_external_json,
+#     main,
+#     parse_filepath_from_args,
+#     EnvVar,
+#     EnvVars,
+# )
+
+
+# def get_mock_logger(mocker: pytest_mock.MockFixture) -> pytest_mock.MockType:
+#     """Return a mock logger.
+
+#     Args:
+#     ----
+#         mocker (pytest_mock.MockFixture): Mock fixture for patching
+
+#     Returns:
+#     -------
+#         pytest_mock.MockType: Mocked logger
+
+#     """
+#     return mocker.patch("scripts.python.aws.dotenv_to_container_def_envs_json.LOGGER")
+
+
+# DEFAULT_TEST_DOTENV_CONTENT = """
+#     # comment
+#     HOGE=hoge
+#     HUGA="huga"
+#     PIYO='piyo'
+
+#     export HOGE_HUGA="hoge_huga"
+#     HOGE_PIYO=hoge_piyo # comment
+#     """
+
+# # ref: https://docs.pytest.org/en/stable/how-to/tmp_path.html
+
+
+# @pytest.fixture(scope="session")
+# def tmpfiles(
+#     tmp_path_factory: pytest.TempPathFactory,
+#     content: str = DEFAULT_TEST_DOTENV_CONTENT,
+# ) -> Path:
+#     """Fixture for creating a dotenv file.
+
+#     Args:
+#         tmp_path (Path): Temporary path for the file.
+
+#     Returns:
+#         Path: The path to the created dotenv file.
+#     """
+#     basetemp = tmp_path_factory.getbasetemp()
+#     file_path = basetemp / ".env.test"
+#     file_path.write_text(content)
+#     return file_path
+
+
+# def test_fixtures_tmpfiles(tmpfiles: Path) -> None:  # pylint: disable=redefined-outer-name
+#     """Test tmpfiles fixture works.
+
+#     Args:
+#     ----
+#         tmpfiles (Path): Path to the base temporary directory
+
+#     """
+#     assert (tmpfiles / ".env.test").exists()
+
+
+# @pytest.mark.parametrize(
+#     ("dotenv_content", "expected_output"),
+#     [
+#         (
+#             """
+#             HOGE=hoge
+#             HUGA="huga"
+#             PIYO='piyo'
+#             export HOGE_HUGA="hoge_huga"
+#             HOGE_PIYO=hoge_piyo # comment
+#             """,
+#             {
+#                 "envs": [
+#                     {"name": "HOGE", "value": "hoge"},
+#                     {"name": "HUGA", "value": "huga"},
+#                     {"name": "PIYO", "value": "piyo"},
+#                     {"name": "HOGE_HUGA", "value": "hoge_huga"},
+#                     {"name": "HOGE_PIYO", "value": "hoge_piyo"},
+#                 ],
+#             },
+#         ),
+#         ("PIYO='piyo'", {"envs": [{"name": "PIYO", "value": "piyo"}]}),
+#         ('HUGA="huga"', {"envs": [{"name": "HUGA", "value": "huga"}]}),
+#         ("HOGE=hoge", {"envs": [{"name": "HOGE", "value": "hoge"}]}),
+#         (
+#             'export HOGE_HUGA="hoge_huga"',
+#             {"envs": [{"name": "HOGE_HUGA", "value": "hoge_huga"}]},
+#         ),
+#         (
+#             "HOGE_PIYO=hoge_piyo # comment",
+#             {"envs": [{"name": "HOGE_PIYO", "value": "hoge_piyo"}]},
+#         ),
+#         (
+#             "",  # Empty dotenv file
+#             {"envs": []},
+#         ),
+#     ],
+# )
+# def test_dotenv_to_tf_external_json_parametrized(
+#     dotenv_content: str,
+#     expected_output: dict[str, Any],
+#     tmp_path: Path,
+#     capsys: pytest.CaptureFixture,
+# ) -> None:
+#     """Test dotenv to tf external json conversion with various contents.
+
+#     Args:
+#         dotenv_content (str): The content of the dotenv file.
+#         expected_output (dict[str, Any]): The expected output JSON.
+#         tmp_path (Path): Temporary path for the file.
+#         capsys (pytest.CaptureFixture): Fixture to capture stdout and stderr.
+#     """
+#     file_path = tmp_path / ".env"
+#     file_path.write_text(dotenv_content)
+
+#     dotenv_to_tf_external_json(str(file_path))
+#     captured = capsys.readouterr()
+#     output = json.loads(captured.out)
+
+#     assert output == expected_output
+
+
+# @pytest.mark.parametrize(
+#     ("dotenv_content", "expected_output"),
+#     [
+#         (
+#             """
+#             INVALID LINE
+#             ANOTHER INVALID LINE
+#             HOGE=hoge
+#             """,
+#             {"envs": [{"name": "HOGE", "value": "hoge"}]},
+#         ),
+#         (
+#             """
+#             INVALID LINE
+#             """,
+#             {"envs": []},
+#         ),
+#     ],
+# )
+# def test_dotenv_to_tf_external_json_invalid_lines_parametrized(
+#     dotenv_content: str,
+#     expected_output: dict[str, Any],
+#     tmp_path: Path,
+#     capsys: pytest.CaptureFixture,
+# ) -> None:
+#     """Test dotenv to tf external json conversion with invalid lines.
+
+#     Args:
+#         dotenv_content (str): The content of the dotenv file.
+#         expected_output (dict[str, Any]): The expected output JSON.
+#         tmp_path (Path): Temporary path for the file.
+#         capsys (pytest.CaptureFixture): Fixture to capture stdout and stderr.
+#     """
+#     file_path = tmp_path / ".env.invalid"
+#     file_path.write_text(dotenv_content)
+
+#     dotenv_to_tf_external_json(str(file_path))
+#     captured = capsys.readouterr()
+#     output = json.loads(captured.out)
+
+#     assert output == expected_output
+
+
+# def test_dotenv_to_tf_external_json_os_error(mocker: MockerFixture) -> None:
+#     """Test that OSError is raised and handled correctly.
+
+#     Args:
+#         mocker (MockerFixture): Fixture to mock functions.
+#     """
+#     mock_open = mocker.patch("pathlib.Path.open", side_effect=OSError("Mocked OSError"))
+
+#     with pytest.raises(OSError):  # noqa: PT011
+#         dotenv_to_tf_external_json("./src/.env.defaults")
+
+#     mock_open.assert_called_once()
+
+
+# @pytest.mark.parametrize(
+#     ("sys_args", "expected_output"),
+#     [
+#         (["script_name", ".env.test"], ".env.test"),
+#         (["script_name", "-f", ".env.test"], ".env.test"),
+#         (["script_name"], "./src/.env.defaults"),
+#     ],
+# )
+# def test_parse_args_parametrized(
+#     monkeypatch: pytest.MonkeyPatch,
+#     sys_args: list[str],
+#     expected_output: str,
+# ) -> None:
+#     """Test parse_args with different system arguments.
+
+#     Args:
+#         monkeypatch (pytest.MonkeyPatch): Fixture to patch objects or methods.
+#         sys_args (list[str]): The system arguments passed to the script.
+#         expected_output (str): The expected file path output.
+#     """
+#     monkeypatch.setattr(sys, "argv", sys_args)
+#     file_path = parse_filepath_from_args()
+#     assert file_path == expected_output
+
+
+# def get_mock_logger(mocker: MockerFixture) -> MagicMock:
+#     """Return a mock logger.
+
+#     Args:
+#         mocker (MockerFixture): Fixture to mock functions.
+
+#     Returns:
+#         MagicMock: Mock logger.
+#     """
+#     return mocker.patch("scripts.python.aws.dotenv_to_container_def_envs_json.logger")
+
+
+# def test_main(
+#     monkeypatch: pytest.MonkeyPatch,
+#     mocker: MockerFixture,
+#     dotenv_file: Path,
+# ) -> None:
+#     """Test main function using mocked sys args and dotenv processing.
+
+#     Args:
+#         monkeypatch (pytest.MonkeyPatch): Fixture to patch objects or methods.
+#         mocker (MockerFixture): Fixture to mock functions.
+#         dotenv_file (Path): Path to the temporary dotenv file.
+#     """
+#     mock_logger = get_mock_logger(mocker)
+#     monkeypatch.setattr(sys, "argv", ["script_name", str(dotenv_file)])
+#     mock_dotenv_to_tf_external_json = mocker.patch(
+#         "scripts.python.aws.dotenv_to_container_def_envs_json",
+#     )
+
+#     main()
+
+#     mock_dotenv_to_tf_external_json.assert_called_once_with(str(dotenv_file))
+#     mock_logger.debug.assert_called()
+
+
+# def test_main_exception(monkeypatch: pytest.MonkeyPatch, mocker: MockerFixture) -> None:
+#     """Test main() handles exceptions and exits with code 1.
+
+#     Args:
+#         monkeypatch (pytest.MonkeyPatch): Fixture to patch objects or methods.
+#         mocker (MockerFixture): Fixture to mock functions.
+#     """
+
+#     def mock_parse_args() -> None:
+#         msg = "Mocked Exception"
+#         raise Exception(msg)
+
+#     mock_logger = get_mock_logger(mocker)
+#     monkeypatch.setattr(
+#         "scripts.python.aws.parse_args",
+#         mock_parse_args,
+#     )
+
+#     with pytest.raises(SystemExit) as excinfo:
+#         main()
+
+#     assert excinfo.type is SystemExit
+#     assert excinfo.value.code == 1
+#     mock_logger.exception.assert_called_once_with("Mocked Exception")

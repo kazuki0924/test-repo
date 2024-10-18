@@ -1,0 +1,173 @@
+# eslint-disable yml/block-mapping-colon-indicator-newline
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+# - composite actions:
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+# - GitHub Actions starter-workflows:
+#   - https://github.com/actions/starter-workflows
+# - GitHub Actions starter-workflows - ci/docker-image.yml:
+#   - https://github.com/actions/starter-workflows/blob/main/ci/docker-image.yml
+# - docker/build-push-action:
+#   - https://github.com/docker/build-push-action
+# - docker docs: Docker build cache
+#   - https://docs.docker.com/build/cache/
+# - Build cache invalidation
+#   - https://docs.docker.com/build/cache/invalidation/
+# requirements:
+# - following envs set in .env.tool-versions:
+#   - ACTIONS_DOCKER_METADATA_VERSION
+#   - ACTIONS_DOCKER_BUILD_PUSH_VERSION
+# contexts:
+# - Docker Engine 23.0からはdocker buildはbuildx、およびBuildKitがデフォルトで使用されるようになった
+# - Docker Engine 25.0にバンドルされているBuildKit 0.12からはAmazon ECRでのremote cacheがサポートされるようにようになった
+name: build-push
+description: |
+  docker buildとpushを行う
+inputs:
+  WORKDIR:
+    description: |
+      作業ディレクトリ
+    required: true
+    default: .
+  CONTEXT:
+    description: |
+      docker buildのコンテキスト
+    required: true
+    default: .
+  ECR_REGISTRY:
+    description: |
+      ECR Registry
+    required: true
+    default: "\
+      ${{ var.AWS_ACCOUNT_ID_DEV }}\
+      .dkr.ecr.\
+      ${{ var.AWS_REGION_PRIMARY }}\
+      .amazonaws.com"
+  ECR_REPOSITORY:
+    description: |
+      ECR Repository
+    required: true
+    default: microservice-name
+  CACHE_TAG:
+    description: |
+      cacheのimage tag
+    required: false
+    default: cache
+  MICROSERVICE_NAME:
+    description: |
+      マイクロサービス名
+      ""の場合はサービス共通イメージと判断し、image tagに使用しない
+    required: false
+    default: ""
+  SEMVER:
+    description: |
+      image tagに使用するsemver
+      ""の場合は
+    required: false
+    default: ""
+  BRANCH:
+    description: |
+      image tagに使用するブランチ名
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - name: source .env.tool-versions
+      uses: ./.github/actions/setup/common/source-env-tool-versions
+    # ref: https://github.com/docker/metadata-action/blob/master/action.yml
+    - name: docker metadata
+      id: meta
+      uses:
+        "docker/metadata-action@\
+        ${{ env.ACTIONS_DOCKER_METADATA_VERSION }}"
+      with:
+        context: workflow
+        images: |
+          name=${{ inputs.ECR_REGISTRY }}/${{ inputs.ECR_REPOSITORY }},enable=true
+        flavor: |
+          latest=auto
+          prefix=${{ inputs.BRANCH }}-
+        tags: |
+          type=sha,prefix=sha-,format=short
+          type=sha,prefix=sha-,format=long
+          type=sha,format=short
+          type=sha,format=long
+    - name: image tags
+      id: tags
+      shell: bash
+      env:
+        BRANCH: ${{ inputs.BRANCH }}
+        MICROSERVICE_NAME: ${{ inputs.MICROSERVICE_NAME }}
+        SEMVER: ${{ inputs.SEMVER }}
+      # TBD: python化、または.shファイルに切り出してbatsでutしてカバレッジを100にする事を検討
+      run: |
+        # ref: https://docs.github.com/en/get-started/using-git/dealing-with-special-characters-in-branch-and-tag-names
+        TAGS=()
+
+        # TODO: get semver
+        # get by sha1, then by branch name
+        # microservicename-app-feat/branch-name-YYMMDDHHMM
+        # microservicename-app-sha1-1234567
+        # microservicename-app-v1.0.0
+        # microservicename-infra-v1.0.0
+        # infra-v1.0.0
+        # cicd-v1.0.0
+
+        # infra.v1.0.0
+
+        # v${SEMVER}
+        # v${MAJOR}
+        # v${MAJOR}.${MINOR}
+        ${SHA_LONG}
+        ${SHA_SHORT}
+        sha-${SHA_LONG}
+        sha-${SHA_SHORT}
+        YYMMDD
+        YYMMDDHHMM
+        ${BRANCH_NAME}
+        ${BRANCH_NAME}-latest
+        latest
+
+        {
+          echo "TAGS<<EOF"
+          printf "%s\n" "${TAGS[@]}"
+          echo "EOF"
+        } >>"${GITHUB_OUTPUT}"
+    # ref: https://github.com/docker/build-push-action/blob/master/action.yml
+    - name: docker build and push
+      uses: \
+        "docker/build-push-action@\
+        ${{ env.ACTIONS_DOCKER_BUILD_PUSH_VERSION }}"
+      working-directory: ${{ inputs.WORKDIR }}
+      env:
+        ECR_REF: "${{ inputs.ECR_REGISTRY }}/${{ inputs.ECR_REPOSITORY }}:${{ inputs.CACHE_TAG }}"
+      with:
+        pull: false
+        push: true
+        # refs:
+        # - https://github.com/docker/build-push-action#git-context
+        # - https://github.com/docker/build-push-action#path-context
+        context: ${{ inputs.CONTEXT }}
+        # refs:
+        # - https://github.com/docker/build-push-action/tree/master?tab=readme-ov-file#customizing
+        # - https://docs.docker.com/reference/cli/docker/buildx/build/#cache-from
+        # - https://github.com/moby/buildkit#registry-push-image-and-cache-separately
+        # TBD: use estargz or zstd instead of gzip
+        cache-from: "\
+          type=registry,\
+          mode=max,\
+          image-manifest=true,\
+          oci-mediatypes=true,\
+          compression=gzip,\
+          force-compression=true,\
+          ignore-error=false,\
+          ref=${ECR_REF}"
+        cache-to: "\
+          type=registry,\
+          ref=${ECR_REF}"
+        tags: |
+          ${{ steps.meta.outputs.tags }}
+          ${{ steps.tags.outputs.TAGS }}
+        labels: ${{ steps.meta.outputs.labels }}

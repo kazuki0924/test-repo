@@ -1,0 +1,138 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyOutdatedTLS",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*",
+        "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log"
+      ],
+      "Condition": {
+        "NumericLessThan": {
+          "s3:TlsVersion": "1.2"
+        }
+      }
+    },
+    {
+      "Sid": "DenyInsecureTransport",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*",
+        "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log"
+      ],
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "false"
+        }
+      }
+    },
+    {
+      "Sid": "AllowLoggingS3AmazonAWSComWrite",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logging.s3.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*",
+      "Condition": {
+        "ForAnyValue:StringEquals": {
+          "aws:SourceAccount": "368263228018"
+        },
+        "ForAnyValue:ArnLike": {
+          "aws:SourceArn": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log"
+        }
+      }
+    },
+    {
+      "Sid": "AllowLoggingS3AmazonAWSComRead",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logging.s3.amazonaws.com"
+      },
+      "Action": "s3:GetBucketAcl",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log"
+    },
+    {
+      "Sid": "AllowDeliveryLogsAmazonAWSComWrite",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "delivery.logs.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*",
+      "Condition": {
+        "StringEquals": {
+          "s3:x-amz-acl": "bucket-owner-full-control"
+        }
+      }
+    },
+    {
+      "Sid": "AllowDeliveryLogsAmazonAWSComRead",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "delivery.logs.amazonaws.com"
+      },
+      "Action": ["s3:ListBucket", "s3:GetBucketAcl"],
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log"
+    },
+    {
+      "Sid": "AllowELBServiceAccountApNortheast1Write",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::582318560864:root"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*"
+    },
+    {
+      "Sid": "AllowELBServiceAccountEuWest1Write",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::156460612806:root"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*"
+    },
+    {
+      "Sid": "AllowELBServiceAccountUsEast1Write",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::127311923021:root"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*"
+    },
+    {
+      "Sid": "AllowELBServiceAccountUsWest2Write",
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::797873946194:root"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*"
+    },
+    {
+      "Sid": "AllowLogDeliveryElasticLoadBalancingAmazonAWSComWrite",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
+      },
+      "Action": "s3:PutObject",
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log/*"
+    },
+    {
+      "Sid": "AllowLogDeliveryElasticLoadBalancingAmazonAWSComRead",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "logdelivery.elasticloadbalancing.amazonaws.com"
+      },
+      "Action": ["s3:ListBucket", "s3:GetBucketAcl"],
+      "Resource": "arn:aws:s3:::xev-vpp-evems-dev-s3-alb-access-log"
+    }
+  ]
+}

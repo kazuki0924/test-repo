@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        // Dev Containersの実行に必要となる拡張
+        // Remote Development
+        "ms-vscode-remote.vscode-remote-extensionpack"
+    ]
+  }

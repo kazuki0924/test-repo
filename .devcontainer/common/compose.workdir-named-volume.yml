@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=./.ignore_json_schema.json
+x-workdir-named-volume:
+  services:
+    build:
+    volumes: &workdir-named-volume
+      - "workspace:${DEVCONTAINER_HOME}/workspace/:delegated" # リポジトリをbind mountせず、git cloneする場合
+services:
+  infra-slim:
+    volumes: *workdir-named-volume
+  infra-sensible:
+    volumes: *workdir-named-volume
+  infra-edge:
+    volumes: *workdir-named-volume

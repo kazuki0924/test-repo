@@ -1,0 +1,57 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+# - composite actions:
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+# requirements:
+# - following envs set in .env.tool-versions:
+#   - TERRAFORM_VERSION
+#   - TERRAGRUNT_VERSION
+name: setup-terragrunt
+description: |
+  terragruntのセットアップを行う
+runs:
+  using: composite
+  steps:
+    - name: source .env.tool-versions
+      uses: ./.github/actions/setup/common/source-env-tool-versions
+    - name: setup terraform
+      uses: ./.github/actions/setup/terraform
+    - name: cache terragrunt binary
+      id: cache_terragrunt_binary
+      uses: actions/cache@v4.1.0
+      with:
+        path: /usr/local/bin/terragrunt
+        key: "${{ runner.os }}-\
+          terragrunt-\
+          binary-\
+          cache-\
+          ${{ env.TERRAGRUNT_VERSION }}"
+    # ref:
+    # - Terragrunt Provider Caching
+    # - https://terragrunt.gruntwork.io/docs/features/provider-cache/
+    - name: cache .terragrunt-provider-cache
+      id: cache_terragrunt_provider
+      uses: actions/cache@v4.1.0
+      with:
+        path: "${{ github.workspace }}/.terragrunt-provider-cache"
+        key: "${{ runner.os }}-\
+          terragrunt-\
+          provider-\
+          cache-\
+          ${{ hashFiles('.env.tool-versions') }}"
+    - name: install terragrunt
+      if: >-
+        ${{ steps.cache_terragrunt_binary.outputs.cache-hit != 'true' }}
+      shell: bash
+      env:
+        TERRAGRUNT_VERSION: "${{ env.TERRAGRUNT_VERSION }}"
+      run: |
+        BINARY_NAME="terragrunt"; \
+        REPOSITORY_NAME="gruntwork-io/terragrunt"; \
+        TAG_NAME="v${TERRAGRUNT_VERSION}"; \
+        TARGETARCH="$(dpkg --print-architecture)"; \
+        RELEASE_FILE_NAME="${BINARY_NAME}_linux_${TARGETARCH}"; \
+        wget --progress=dot:giga "https://github.com/${REPOSITORY_NAME}/releases/download/${TAG_NAME}/${RELEASE_FILE_NAME}" \
+        && mv "${RELEASE_FILE_NAME}" "${BINARY_NAME}" \
+        && install -v -m 0755 "${BINARY_NAME}" /usr/local/bin

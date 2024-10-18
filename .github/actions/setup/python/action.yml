@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+name: setup-python
+description: |
+  pythonのセットアップを行う
+runs:
+  using: composite
+  steps:
+    - name: source .env.tool-versions
+      uses: ./.github/actions/setup/common/source-env-tool-versions
+    - uses: "actions/setup-python@v${{ env.ACTIONS_SETUP_PYTHON_VERSION }}"
+      with:
+        python-version: "${{ env.PYTHON_VERSION }}"
+        cache: pip

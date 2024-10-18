@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+# - composite actions:
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+# requirements:
+# - following envs set in .env.tool-versions:
+#   - TERRAFORM_VERSION
+#   - TERRAGRUNT_VERSION
+name: ci-terragrunt-hclfmt
+description: |
+  terragrunt hclfmt
+runs:
+  using: composite
+  steps:
+    - name: setup terragrunt
+      uses: ./.github/actions/setup/terraform/terragrunt
+    - name: terragrunt hclfmt
+      shell: bash
+      # ref: https://terragrunt.gruntwork.io/docs/reference/cli-options/#hclfmt
+      run: >-
+        terragrunt
+        hclfmt
+        --terragrunt-check
+

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/v16.12.2/schemas/config.json",
+  "bootstrap-sha": "b6247ed39096a5d0bf85b38ca550f0dacaa2141f",
+  "last-release-sha": "b6247ed39096a5d0bf85b38ca550f0dacaa2141f",
+  "release-type": "terraform-module",
+  "versioning": "default",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": true,
+  "skip-github-release": false,
+  "draft": false,
+  "prerelease": false,
+  "draft-pull-request": false,
+  "separate-pull-requests": false,
+  "pull-request-header": "components:",
+  "pull-request-footer": "- release-pleaseによって作成されたこのrelease prがマージされるとrelease noteとgit tagが各componentごとに作成されます\n- リリースフローの詳細はdocs/release/release_flow.mdを参照",
+  "include-component-in-tag": true,
+  "include-v-in-tag": true,
+  "changelog-type": "default",
+  "changelog-path": "CHANGELOG.md",
+  "tag-separator": "-",
+  "release-search-depth": 10,
+  "commit-search-depth": 2,
+  "packages": {
+    "infra/terraform": {
+      "package-name": "infra-terraform"
+    },
+    "src/subdomain-name1/microservice-name1": {
+      "release-type": "python",
+      "package-name": "microservice-name1-app",
+      "exclude-paths": ["src/subdomain-name1/microservice-name1/infra/terraform"]
+    },
+    "src/subdomain-name1/microservice-name1/infra/terraform": {
+      "package-name": "microservice-name1-infra"
+    },
+    ".github": {
+      "package-name": "infra-cicd"
+    },
+    ".devcontainer": {
+      "package-name": "infra-devcontainer"
+    },
+    "infra/docker/app/baseimage": {
+      "package-name": "app-baseimage"
+    }
+  }
+}

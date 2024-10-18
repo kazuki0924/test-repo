@@ -1,0 +1,68 @@
+// fetched from: https://github.com/rafamadriz/friendly-snippets via python script
+{
+  "Assert equal": {
+    "prefix": "fs-ase",
+    "body": "self.assertEqual(${1:expected}, ${2:actual}${3:, '${4:message}'})$0",
+    "scope": "python"
+  },
+  "Assert not equal": {
+    "prefix": "fs-asne",
+    "body": "self.assertNotEqual(${1:expected}, ${2:actual}${3:, '${4:message}'})$0",
+    "scope": "python"
+  },
+  "Assert raises": {
+    "prefix": "fs-asr",
+    "body": "self.assertRaises(${1:exception}, ${2:callable}, ${3:args})$0",
+    "scope": "python"
+  },
+  "Assert True": {
+    "prefix": "fs-ast",
+    "body": "self.assertTrue(${1:actual}${2:, '${3:message}'})$0",
+    "scope": "python"
+  },
+  "Assert False": {
+    "prefix": "fs-asf",
+    "body": "self.assertFalse(${1:actual}${2:, '${3:message}'})$0",
+    "scope": "python"
+  },
+  "Assert is": {
+    "prefix": "fs-asi",
+    "body": "self.assertIs(${1:expected}, ${2:actual}${3:, '${4:message}'})$0",
+    "scope": "python"
+  },
+  "Assert is not": {
+    "prefix": "fs-asint",
+    "body": "self.assertIsNot(${1:expected}, ${2:actual}${3:, '${4:message}'})$0",
+    "scope": "python"
+  },
+  "Assert is None": {
+    "prefix": "fs-asino",
+    "body": "self.assertIsNone(${1:actual}${2:, '${3:message}'})$0",
+    "scope": "python"
+  },
+  "Assert is not None": {
+    "prefix": "fs-asinno",
+    "body": "self.assertIsNotNone(${1:actual}${2:, '${3:message}'})$0",
+    "scope": "python"
+  },
+  "Assert in": {
+    "prefix": "fs-asin",
+    "body": "self.assertIn(${1:needle}, ${2:haystack}${3:, '${4:message}'})$0",
+    "scope": "python"
+  },
+  "Assert not in": {
+    "prefix": "fs-asni",
+    "body": "self.assertNotIn(${1:needle}, ${2:haystack}${3:, '${4:message}'})$0",
+    "scope": "python"
+  },
+  "Assert": {
+    "prefix": "fs-as",
+    "body": "self.assert_(${1:boolean expression}${2:, '${3:message}'})$0",
+    "scope": "python"
+  },
+  "Fail (a test)": {
+    "prefix": "fs-fail",
+    "body": "self.fail('${1:message}')$0",
+    "scope": "python"
+  }
+}

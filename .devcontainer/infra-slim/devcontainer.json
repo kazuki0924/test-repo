@@ -1,0 +1,571 @@
+{
+  // ref: https://containers.dev/implementors/json_reference/
+  "name": "infra-slim",
+  "service": "infra-slim",
+  "runServices": ["infra-slim"],
+  "dockerComposeFile": ["../common/compose.yml", "../common/compose.workdir-named-volume.yml"],
+  "workspaceFolder": "/home/devcontainer/workspace",
+  "containerUser": "devcontainer",
+  "remoteUser": "devcontainer",
+  "userEnvProbe": "loginInteractiveShell",
+  "shutdownAction": "none",
+  "privileged": true,
+  "updateRemoteUserUID": false,
+  "initializeCommand": "bash ./.devcontainer/common/scripts/lifecycle/initialize_command.sh",
+  "onCreateCommand": "bash ~/scripts/lifecycle/on_create_command.sh",
+  "postCreateCommand": "bash ~/scripts/lifecycle/post_create_command.sh",
+  "postStartCommand": "bash ./.devcontainer/common/scripts/lifecycle/post_start_command.sh",
+  "forwardPorts": [3000, 3001, 3002, 8000, 8001, 8002, 8080, 8081, 8082],
+  // "postStartCommand": "",
+  // "postAttachCommand": "",
+  // for use in ./.devcontainer/infra-personal/devcontainer.json etc.
+  // ref: https://github.com/devcontainers/features/tree/main/src/docker-in-docker
+  // "features": {
+  //   "ghcr.io/devcontainers/features/docker-in-docker:2": {
+  //     "version": "${localEnv:MOBY_VERSION}",
+  //     "moby": true,
+  //     "mobyBuildxVersion": "${localEnv:DOCKER_BUILDX_VERSION}",
+  //     "installDockerBuildx": true,
+  //     "dockerDashComposeVersion": "${localEnv:DOCKER_COMPOSE_VERSION}"
+  //   }
+  // },
+  // ref: https://github.com/devcontainers/features/tree/main/src/docker-outside-of-docker
+  // "features": {
+  //   "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+  //     "version": "${localEnv:MOBY_VERSION}",
+  //     "moby": true,
+  //     "mobyBuildxVersion": "${localEnv:DOCKER_BUILDX_VERSION}",
+  //     "installDockerBuildx": true,
+  //     "dockerDashComposeVersion": "${localEnv:DOCKER_COMPOSE_VERSION}"
+  //   }
+  // },
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "python.defaultInterpreterPath": "./scripts/python/.venv/bin/python",
+        "python.venvFolders": ["./scripts/python/.venv"],
+        "terraform.languageServer.terraform.path": "/usr/local/bin/terraform"
+      },
+      "extensions": [
+        // [Terraform]
+        // HashiCorp Terraform (Preview)
+        // https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform-preview
+        "HashiCorp.terraform-preview",
+        // HashiCorp Terraform
+        // https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform
+        // "HashiCorp.terraform",
+        // Terraform Advanced Syntax Highlighting
+        // https://marketplace.visualstudio.com/items?itemName=pjmiravalle.terraform-advanced-syntax-highlighting
+        // "pjmiravalle.terraform-advanced-syntax-highlighting",
+        // infracost
+        // https://marketplace.visualstudio.com/items?itemName=Infracost.infracost
+        // "Infracost.infracost",
+        // Terraform Toolbox
+        // https://marketplace.visualstudio.com/items?itemName=NoahCanadea.terraform-toolbox
+        // "NoahCanadea.terraform-toolbox",
+        // [HCL]
+        // HashiCorp HCL
+        // https://marketplace.visualstudio.com/items?itemName=HashiCorp.HCL
+        "HashiCorp.HCL",
+        // HCL Format
+        // https://marketplace.visualstudio.com/items?itemName=fredwangwang.vscode-hcl-format
+        // "fredwangwang.vscode-hcl-format",
+        // [Python]
+        // Python
+        // https://marketplace.visualstudio.com/items?itemName=ms-python.python
+        "ms-python.python",
+        // Pylance
+        // https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance
+        // "ms-python.vscode-pylance",
+        // Pyright
+        // https://marketplace.visualstudio.com/items?itemName=ms-pyright.pyright
+        // "ms-pyright.pyright",
+        // Python Debugger
+        // https://marketplace.visualstudio.com/items?itemName=ms-python.debugpy
+        // "ms-python.debugpy",
+        // Ruff
+        // https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff
+        // "charliermarsh.ruff",
+        // Mypy Type Checker
+        // https://marketplace.visualstudio.com/items?itemName=ms-python.mypy-type-checker
+        // "ms-python.mypy-type-checker",
+        // Python Test Explorer for Visual Studio Code
+        // https://marketplace.visualstudio.com/items?itemName=LittleFoxTeam.vscode-python-test-adapter
+        // "LittleFoxTeam.vscode-python-test-adapter",
+        // autoDocstring - Python Docstring Generator
+        // https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring
+        // "njpwerner.autodocstring",
+        // AWS boto3
+        // https://marketplace.visualstudio.com/items?itemName=Boto3typed.boto3-ide
+        // "Boto3typed.boto3-ide",
+        // Better Jinja
+        // https://marketplace.visualstudio.com/items?itemName=samuelcolvin.jinjahtml
+        // "samuelcolvin.jinjahtml",
+        // AREPL for python
+        // https://marketplace.visualstudio.com/items?itemName=almenon.arepl
+        // "almenon.arepl",
+        // Pylint
+        // https://marketplace.visualstudio.com/items?itemName=ms-python.pylint
+        // "ms-python.pylint",
+        // Python Poetry
+        // https://marketplace.visualstudio.com/items?itemName=zeshuaro.vscode-python-poetry
+        // "zeshuaro.vscode-python-poetry",
+        // Python Config
+        // https://marketplace.visualstudio.com/items?itemName=franneck94.vscode-python-config
+        // "franneck94.vscode-python-config",
+        // Wolf
+        // https://marketplace.visualstudio.com/items?itemName=traBpUkciP.wolf
+        // "traBpUkciP.wolf",
+        // [JavaScript / TypeScript]
+        // npm Intellisense
+        // https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense
+        // "christian-kohler.npm-intellisense",
+        // [Docker]
+        // Docker
+        // https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker
+        "ms-azuretools.vscode-docker",
+        // hadolint
+        // https://marketplace.visualstudio.com/items?itemName=exiasr.hadolint
+        // "exiasr.hadolint",
+        // Docker Explorer
+        // https://marketplace.visualstudio.com/items?itemName=formulahendry.docker-explorer
+        // "formulahendry.docker-explorer",
+        // Better DockerFile Syntax
+        // https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-dockerfile-syntax
+        // "jeff-hykin.better-dockerfile-syntax",
+        // [Shell]
+        // shfmt
+        // https://marketplace.visualstudio.com/items?itemName=mkhl.shfmt
+        // "mkhl.shfmt",
+        // ShellCheck
+        // https://marketplace.visualstudio.com/items?itemName=timonwong.shellcheck
+        // "timonwong.shellcheck",
+        // Bash IDE
+        // https://marketplace.visualstudio.com/items?itemName=mads-hartmann.bash-ide-vscode
+        // "mads-hartmann.bash-ide-vscode",
+        // Bats (Bash Automated Testing System)
+        // https://marketplace.visualstudio.com/items?itemName=jetmartin.bats
+        // "jetmartin.bats",
+        // "mads-hartmann.bash-ide-vscode",
+        // [Makefile]
+        // Makefile Tools
+        // https://marketplace.visualstudio.com/items?itemName=ms-vscode.makefile-tools
+        "ms-vscode.makefile-tools",
+        // [JSON, JSONC, JavaScript, TypeScript, etc.]
+        // Biome
+        // https://marketplace.visualstudio.com/items?itemName=biomejs.biome
+        // "biomejs.biome",
+        // [JSON, JSONC, YAML, JavaScript, TypeScript, etc.]
+        // ESLint
+        // https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+        // "dbaeumer.vscode-eslint",
+        // [YAML]
+        // YAML
+        // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+        "redhat.vscode-yaml",
+        // yamlfmt
+        // https://marketplace.visualstudio.com/items?itemName=bluebrown.yamlfmt
+        // "bluebrown.yamlfmt",
+        // [YAML: GitHub Actions]
+        // GitHub Actions
+        // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions
+        "GitHub.vscode-github-actions",
+        // [YAML: Ansible]
+        // Ansible
+        // https://marketplace.visualstudio.com/items?itemName=redhat.ansible
+        // "redhat.ansible",
+        // [dotenv]
+        // Dotenv Official +Vault
+        // https://marketplace.visualstudio.com/items?itemName=dotenv.dotenv-vscode
+        "dotenv.dotenv-vscode",
+        // [TOML]
+        // Even Better TOML
+        // https://marketplace.visualstudio.com/items?itemName=tamasfe.even-better-toml
+        "tamasfe.even-better-toml",
+        // [HTML, XML, etc.]
+        // Auto Rename Tag
+        // https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag
+        // "formulahendry.auto-rename-tag",
+        // [XML]
+        // XML
+        // https://marketplace.visualstudio.com/items?itemName=redhat.vscode-xml
+        // "redhat.vscode-xml",
+        // [CSV]
+        // Better CSV Syntax
+        // https://marketplace.visualstudio.com/items?itemName=jeff-hykin.better-csv-syntax
+        // "jeff-hykin.better-csv-syntax",
+        // [SQL]
+        // sqlfluff
+        // https://marketplace.visualstudio.com/items?itemName=dorzey.vscode-sqlfluff
+        // "dorzey.vscode-sqlfluff",
+        // [Markdown]
+        // Markdown All in One
+        // https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
+        "yzhang.markdown-all-in-one",
+        // Markdown Extended
+        // https://marketplace.visualstudio.com/items?itemName=jebbs.markdown-extended
+        // "jebbs.markdown-extended",
+        // Markdown Preview Enhanced
+        // https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced
+        "shd101wyy.markdown-preview-enhanced",
+        // Markdown Preview VS Code Highlighting
+        // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-shiki
+        // "bierner.markdown-shiki",
+        // Markdown Footnotes
+        // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-footnotes
+        // "bierner.markdown-footnotes",
+        // Markdown Emoji
+        // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-emoji
+        // "bierner.markdown-emoji",
+        // Markdown Checkboxes
+        // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-checkbox
+        // "bierner.markdown-checkbox",
+        // markdownlint
+        // https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint
+        // "DavidAnson.vscode-markdownlint",
+        // Markdown Table
+        // https://marketplace.visualstudio.com/items?itemName=TakumiI.markdowntable
+        // "TakumiI.markdowntable",
+        // Markdown Table Formatter
+        // https://marketplace.visualstudio.com/items?itemName=fcrespo82.markdown-table-formatter
+        // "fcrespo82.markdown-table-formatter",
+        // Foam
+        // https://marketplace.visualstudio.com/items?itemName=foam.foam-vscode&ref=trap.jp
+        // "foam.foam-vscode",
+        // Markdown Shortcuts
+        // https://marketplace.visualstudio.com/items?itemName=mdickin.markdown-shortcuts
+        // "mdickin.markdown-shortcuts",
+        // Paste Image
+        // https://marketplace.visualstudio.com/items?itemName=mushan.vscode-paste-image&ref=trap.jp
+        // "mushan.vscode-paste-image",
+        // [Markdown: GitHub]
+        // GitHub Markdown Preview
+        // https://marketplace.visualstudio.com/items?itemName=bierner.github-markdown-preview
+        // "bierner.github-markdown-preview",
+        // Markdown Preview Github Styling
+        // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-preview-github-styles
+        // "bierner.markdown-preview-github-styles",
+        // [Markdown: Mermaid]
+        // Mermaid Editor
+        // https://marketplace.visualstudio.com/items?itemName=tomoyukim.vscode-mermaid-editor
+        // "tomoyukim.vscode-mermaid-editor",
+        // Mermaid Markdown Syntax Highlighting
+        // https://marketplace.visualstudio.com/items?itemName=bpruitt-goddard.mermaid-markdown-syntax-highlighting
+        // "bpruitt-goddard.mermaid-markdown-syntax-highlighting",
+        // Markdown Preview Mermaid Support
+        // https://marketplace.visualstudio.com/items?itemName=bierner.markdown-mermaid
+        // "bierner.markdown-mermaid",
+        // [Markdown: Marp]
+        // Marp for VS Code
+        // https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode&ref=trap.jp
+        "marp-team.marp-vs-code",
+        // [Editor Config]
+        // EditorConfig for VS Code
+        "EditorConfig.EditorConfig",
+        // [pre-commit]
+        // pre-commit
+        // https://marketplace.visualstudio.com/items?itemName=elagil.pre-commit-helper
+        // "elagil.pre-commit-helper",
+        // [git]
+        // GitLens — Git supercharged
+        // https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens
+        "eamodio.gitlens",
+        // Git History
+        // https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory
+        // "donjayamanne.githistory",
+        // Git Graph
+        // https://marketplace.visualstudio.com/items?itemName=mhutchie.git-graph
+        // "mhutchie.git-graph",
+        // Git Stash
+        // https://marketplace.visualstudio.com/items?itemName=arturock.gitstash
+        // "arturock.gitstash",
+        // commitlint
+        // https://marketplace.visualstudio.com/items?itemName=joshbolduc.commitlint
+        // "joshbolduc.commitlint",
+        // Conventional Commits
+        // https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits
+        // "vivaxy.vscode-conventional-commits",
+        // Gitmoji
+        // https://marketplace.visualstudio.com/items?itemName=seatonjiang.gitmoji-vscode
+        // "seatonjiang.gitmoji-vscode",
+        // Auto Commit Message
+        // https://marketplace.visualstudio.com/items?itemName=MichaelCurrin.auto-commit-msg
+        // "MichaelCurrin.auto-commit-msg",
+        // Commit Message Editor
+        // https://marketplace.visualstudio.com/items?itemName=adam-bender.commit-message-editor
+        // "adam-bender.commit-message-editor",
+        // Git Diff and Merge Tool
+        // https://marketplace.visualstudio.com/items?itemName=david-rickard.git-diff-and-merge-tool
+        // "david-rickard.git-diff-and-merge-tool",
+        // Git Tree Compare
+        // https://marketplace.visualstudio.com/items?itemName=letmaik.git-tree-compare
+        // "letmaik.git-tree-compare",
+        // Codelf
+        // https://marketplace.visualstudio.com/items?itemName=unbug.codelf
+        // "unbug.codelf",
+        // [Natural Language]
+        // Code Spell Checker
+        // https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker
+        // "streetsidesoftware.code-spell-checker",
+        // テキスト校正くん
+        // https://marketplace.visualstudio.com/items?itemName=ICS.japanese-proofreading
+        // "ICS.japanese-proofreading",
+        // [Comments]
+        // Better Comments
+        // https://marketplace.visualstudio.com/items?itemName=aaron-bond.better-comments
+        // "aaron-bond.better-comments",
+        // Todo Tree
+        // https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree
+        // "Gruntfuggly.todo-tree",
+        // Comment Anchors
+        // https://marketplace.visualstudio.com/items?itemName=ExodiusStudios.comment-anchors
+        // "ExodiusStudios.comment-anchors",
+        // [Vim]
+        // Vim
+        // https://marketplace.visualstudio.com/items?itemName=vscodevim.vim
+        "vscodevim.vim",
+        // NERDTree
+        // https://marketplace.visualstudio.com/items?itemName=Llam4u.nerdtree
+        // "Llam4u.nerdtree",
+        // [OpenAPI]
+        // OpenAPI (Swagger) Editor
+        // https://marketplace.visualstudio.com/items?itemName=42Crunch.vscode-openapi
+        // "42Crunch.vscode-openapi",
+        // Swagger Viewer
+        // https://marketplace.visualstudio.com/items?itemName=Arjun.swagger-viewer
+        // "Arjun.swagger-viewer",
+        // Spectral
+        // https://marketplace.visualstudio.com/items?itemName=stoplight.spectral
+        // "stoplight.spectral",
+        // [API Client]
+        // Thunder Client
+        // https://marketplace.visualstudio.com/items?itemName=rangav.vscode-thunder-client
+        // "rangav.vscode-thunder-client",
+        // [Draw.io]
+        // Draw.io Integration
+        // https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio
+        // "hediet.vscode-drawio",
+        // Drawio Preview
+        // https://marketplace.visualstudio.com/items?itemName=purocean.drawio-preview
+        // "purocean.drawio-preview",
+        // [PlantUML]
+        // PlantUML
+        // https://marketplace.visualstudio.com/items?itemName=jebbs.plantuml
+        // "jebbs.plantuml",
+        // PlantUML auto generator
+        // https://marketplace.visualstudio.com/items?itemName=goohan.plantumlautogenerator
+        // "goohan.plantumlautogenerator",
+        // [ERD]
+        // ERD Editor
+        // https://marketplace.visualstudio.com/items?itemName=dineug.vuerd-vscode
+        // "dineug.vuerd-vscode",
+        // [Security Scans]
+        // Trivy Vulnerability Scanner
+        // https://marketplace.visualstudio.com/items?itemName=AquaSecurityOfficial.trivy-vulnerability-scanner
+        // "AquaSecurityOfficial.trivy-vulnerability-scanner",
+        // Wiz
+        // https://marketplace.visualstudio.com/items?itemName=WizCloud.wizcli-vscode
+        // "WizCloud.wizcli-vscode",
+        // Snyk Security
+        // https://marketplace.visualstudio.com/items?itemName=snyk-security.snyk-vulnerability-scanner
+        // "snyk-security.snyk-vulnerability-scanner",
+        // CodeQL
+        // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-codeql
+        // "GitHub.vscode-codeql",
+        // [GitHub]
+        // GitHub Repositories
+        // https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub
+        "GitHub.remotehub",
+        // GitHub Pull Requests
+        // https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github
+        "GitHub.vscode-pull-request-github",
+        // GitHub Issue Notebooks
+        // https://marketplace.visualstudio.com/items?itemName=ms-vscode.vscode-github-issue-notebooks
+        "ms-vscode.vscode-github-issue-notebooks",
+        // Open in GitHub
+        // https://marketplace.visualstudio.com/items?itemName=fabiospampinato.vscode-open-in-github
+        // "fabiospampinato.vscode-open-in-github",
+        // GitHub Repository Manager
+        // https://marketplace.visualstudio.com/items?itemName=henriqueBruno.github-repository-manager
+        // "henriqueBruno.github-repository-manager",
+        // GitHub Copilot
+        // https://marketplace.visualstudio.com/items?itemName=GitHub.copilot
+        // "GitHub.copilot",
+        // [AWS]
+        // AWS Toolkit
+        // https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.aws-toolkit-vscode
+        "AmazonWebServices.aws-toolkit-vscode",
+        // Amazon Q
+        // https://marketplace.visualstudio.com/items?itemName=AmazonWebServices.amazon-q-vscode
+        // "AmazonWebServices.amazon-q-vscode",
+        // AWS CLI Configure
+        // https://marketplace.visualstudio.com/items?itemName=mark-tucker.aws-cli-configure
+        // "mark-tucker.aws-cli-configure",
+        // [New Relic]
+        // New Relic CodeStream
+        // https://marketplace.visualstudio.com/items?itemName=CodeStream.codestream
+        // "CodeStream.codestream",
+        // [Gremlins]
+        // Gremlins tracker for Visual Studio Code
+        // https://marketplace.visualstudio.com/items?itemName=nhoizey.gremlins
+        // "nhoizey.gremlins",
+        // zenkaku
+        // https://marketplace.visualstudio.com/items?itemName=mosapride.zenkaku
+        // "mosapride.zenkaku",
+        // Render Line Endings
+        // https://marketplace.visualstudio.com/items?itemName=medo64.render-crlf
+        // "medo64.render-crlf",
+        // [Errors]
+        // Error Lens
+        // https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens
+        // "usernamehw.errorlens",
+        // Error Gutters
+        // https://marketplace.visualstudio.com/items?itemName=IgorSbitnev.error-gutters
+        // "IgorSbitnev.error-gutters",
+        // [Snippets]
+        // Control Snippets
+        // https://marketplace.visualstudio.com/items?itemName=svipas.control-snippets
+        // "svipas.control-snippets",
+        // Snippet Generator
+        // https://marketplace.visualstudio.com/items?itemName=wenfangdu.snippet-generator
+        // "wenfangdu.snippet-generator",
+        // [Autocompletes/IntelliSense]
+        // IntelliCode
+        // https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode
+        "VisualStudioExptTeam.vscodeintellicode",
+        // IntelliCode Completions
+        // https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode-completions
+        "VisualStudioExptTeam.vscodeintellicode-completions",
+        // IntelliCode API Usage Examples
+        // https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.intellicode-api-usage-examples
+        "VisualStudioExptTeam.intellicode-api-usage-examples",
+        // Path Intellisense
+        // https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense
+        "christian-kohler.path-intellisense",
+        // All Autocomplete
+        // https://marketplace.visualstudio.com/items?itemName=Atishay-Jain.All-Autocomplete
+        // "Atishay-Jain.All-Autocomplete",
+        // [String Manipulation]
+        // String Manipulation
+        // https://marketplace.visualstudio.com/items?itemName=marclipovsky.string-manipulation
+        // "marclipovsky.string-manipulation",
+        // Sort lines
+        // https://marketplace.visualstudio.com/items?itemName=Tyriar.sort-lines
+        // "Tyriar.sort-lines",
+        // [Files Manipulation]
+        // File Utils
+        // https://marketplace.visualstudio.com/items?itemName=sleistner.vscode-fileutils
+        // "sleistner.vscode-fileutils",
+        // Open File From Path
+        // https://marketplace.visualstudio.com/items?itemName=jack89ita.open-file-from-path
+        // "jack89ita.open-file-from-path",
+        // [Diff]
+        // Diff Folders
+        // https://marketplace.visualstudio.com/items?itemName=L13RARY.l13-diff
+        // "L13RARY.l13-diff",
+        // Compare View
+        // https://marketplace.visualstudio.com/items?itemName=chekweitan.compare-view
+        // "chekweitan.compare-view",
+        // [Log]
+        // Output Colorizer
+        // https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer
+        // "IBM.output-colorizer",
+        // [Run on Save]
+        // Run on Save
+        // https://marketplace.visualstudio.com/items?itemName=emeraldwalk.RunOnSave
+        "emeraldwalk.RunOnSave",
+        // [File Watcher]
+        // File Watcher
+        // https://marketplace.visualstudio.com/items?itemName=appulate.filewatcher
+        // "appulate.filewatcher",
+        // [Project Manager]
+        // Project Manager
+        // https://marketplace.visualstudio.com/items?itemName=alefragnani.project-manager
+        // "alefragnani.project-manager",
+        // [Bookmark]
+        // Bookmarks
+        // https://marketplace.visualstudio.com/items?itemName=alefragnani.Bookmarks
+        // "alefragnani.Bookmarks",
+        // Inline Bookmarks
+        // https://marketplace.visualstudio.com/items?itemName=tintinweb.vscode-inline-bookmarks
+        // "tintinweb.vscode-inline-bookmarks",
+        // [Debugging]
+        // Code Runner
+        // https://marketplace.visualstudio.com/items?itemName=formulahendry.code-runner
+        // "formulahendry.code-runner",
+        // [Testing]
+        // Coverage Gutters
+        // https://marketplace.visualstudio.com/items?itemName=ryanluker.vscode-coverage-gutters
+        // "ryanluker.vscode-coverage-gutters",
+        // Code Coverage
+        // https://marketplace.visualstudio.com/items?itemName=markis.code-coverage
+        // "markis.code-coverage",
+        // Test Explorer UI
+        // https://marketplace.visualstudio.com/items?itemName=hbenl.vscode-test-explorer
+        // "hbenl.vscode-test-explorer",
+        // [Version]
+        // Version Lens
+        // https://marketplace.visualstudio.com/items?itemName=pflannery.vscode-versionlens
+        // "pflannery.vscode-versionlens",
+        // [VSCode: Status Bar]
+        // Formatting Toggle
+        // https://marketplace.visualstudio.com/items?itemName=tombonnike.vscode-status-bar-format-toggle
+        // "tombonnike.vscode-status-bar-format-toggle",
+        // Current File Path
+        // https://marketplace.visualstudio.com/items?itemName=YoshinoriN.current-file-path
+        // "YoshinoriN.current-file-path",
+        // Reload
+        // https://marketplace.visualstudio.com/items?itemName=natqe.reload
+        // "natqe.reload",
+        // [VSCode: Menu Bar]
+        // Shortcut Menu Bar
+        // https://marketplace.visualstudio.com/items?itemName=jerrygoyal.shortcut-menu-bar
+        // "jerrygoyal.shortcut-menu-bar",
+        // [VSCode: Sidebar]
+        // Docs View
+        // https://marketplace.visualstudio.com/items?itemName=bierner.docs-view
+        // "bierner.docs-view",
+        // [VSCode: Bracket]
+        // indent-rainbow
+        // https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow
+        // "oderwat.indent-rainbow",
+        // Bracket Lens
+        // https://marketplace.visualstudio.com/items?itemName=wraith13.bracket-lens
+        // "wraith13.bracket-lens",
+        // [VSCode: Folding]
+        // Better Folding
+        // https://marketplace.visualstudio.com/items?itemName=MohammadBaqer.better-folding
+        // "MohammadBaqer.better-folding",
+        // [VSCode: Color Theme]
+        // GitHub Theme
+        // https://marketplace.visualstudio.com/items?itemName=GitHub.github-vscode-theme
+        // "GitHub.github-vscode-theme",
+        // Linux Themes for VS Code
+        // https://marketplace.visualstudio.com/items?itemName=SolarLiner.linux-themes
+        // "SolarLiner.linux-themes",
+        // One Dark Pro
+        // https://marketplace.visualstudio.com/items?itemName=zhuangtongfa.Material-theme
+        // "zhuangtongfa.Material-theme",
+        // [VSCode: Icon Theme]
+        // Symbols
+        // https://marketplace.visualstudio.com/items?itemName=miguelsolorio.symbols
+        "miguelsolorio.symbols",
+        // Material Icon Theme
+        // https://marketplace.visualstudio.com/items?itemName=PKief.material-icon-theme
+        // "PKief.material-icon-theme",
+        // [VSCode: Product Icon Theme]
+        // Material Product Icons
+        // https://marketplace.visualstudio.com/items?itemName=PKief.material-product-icons
+        "PKief.material-product-icons"
+        // [VSCode: Animation]
+        // VSCode Animations
+        // https://marketplace.visualstudio.com/items?itemName=BrandonKirbyson.vscode-animations
+        // "BrandonKirbyson.vscode-animations",
+        // [Staged]
+        // Blockman - Highlight Nested Code Blocks
+        // https://marketplace.visualstudio.com/items?itemName=leodevbro.blockman
+        // "leodevbro.blockman",
+      ]
+    }
+  }
+}

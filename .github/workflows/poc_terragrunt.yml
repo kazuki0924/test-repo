@@ -1,0 +1,84 @@
+name: poc
+run-name: poc
+on:
+  push:
+    branches:
+      - main # only trigger that works with release-please
+  workflow_dispatch: {}
+permissions:
+  id-token: write
+  pull-requests: write
+  contents: write
+jobs:
+  poc:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        # ref: https://github.com/actions/checkout
+        uses: actions/checkout@v4.1.1
+      - name: github app token
+        # ref: https://github.com/actions/create-github-app-token
+        uses: actions/create-github-app-token@v1.11.0
+        id: app-token
+        with:
+          app-id: ${{ vars.INSTALLATION_ACCESS_TOKEN_APP_ID }}
+          private-key: ${{ secrets.INSTALLATION_ACCESS_TOKEN_PRIVATE_KEY }}
+      - name: source GitHub Actions Repository Variables
+        uses: ./.github/actions/setup/common/source-github-actions-repository-variables
+        with:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+      - name: setup-aws-credentials
+        uses: ./.github/actions/setup/aws/credentials
+        with:
+          # TODO: implement per env workflow dispatch, determine env from pr base branch
+          AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID_DEV }}
+          ENVIRONMENT: dev
+      # TODO: determine workdir from git diff
+      - name: terragrunt plan
+        uses: ./.github/actions/ci/terraform/terragrunt/plan
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/init
+      - name: terragrunt apply
+        uses: ./.github/actions/cd/terraform/terragrunt/apply
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/init
+      - name: terragrunt plan
+        uses: ./.github/actions/ci/terraform/terragrunt/plan
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/storage
+      - name: terragrunt apply
+        uses: ./.github/actions/cd/terraform/terragrunt/apply
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/storage
+      - name: terragrunt plan
+        uses: ./.github/actions/ci/terraform/terragrunt/plan
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/db
+      - name: terragrunt apply
+        uses: ./.github/actions/cd/terraform/terragrunt/apply
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/db
+      - name: terragrunt plan
+        uses: ./.github/actions/ci/terraform/terragrunt/plan
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/network
+      - name: terragrunt apply
+        uses: ./.github/actions/cd/terraform/terragrunt/apply
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/network
+      - name: terragrunt plan
+        uses: ./.github/actions/ci/terraform/terragrunt/plan
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/app
+      - name: terragrunt apply
+        uses: ./.github/actions/cd/terraform/terragrunt/apply
+        with:
+          WORKDIR: ./infra/terraform/aws/environments/dev/app
+      - name: terragrunt plan
+        uses: ./.github/actions/ci/terraform/terragrunt/plan
+        with:
+          WORKDIR: ./src/subdomain-name1/microservice-name1/infra/terraform/aws/environments/dev/app
+      - name: terragrunt apply
+        uses: ./.github/actions/cd/terraform/terragrunt/apply
+        with:
+          WORKDIR: ./src/subdomain-name1/microservice-name1/infra/terraform/aws/environments/dev/app

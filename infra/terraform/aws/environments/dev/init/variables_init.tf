@@ -1,0 +1,1 @@
+../../../modules/init/variables_init.tf

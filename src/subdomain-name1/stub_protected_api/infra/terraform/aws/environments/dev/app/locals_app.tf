@@ -1,0 +1,1 @@
+../../../../../../../../../infra/terraform/aws/modules/app/locals_app.tf

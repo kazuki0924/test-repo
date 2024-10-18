@@ -1,0 +1,53 @@
+// fetched from: https://github.com/rafamadriz/friendly-snippets via python script
+{
+  "PDB set trace": {
+    "prefix": "fs-pdb",
+    "body": "__import__('pdb').set_trace()$0",
+    "description": "Code snippet for pdb debug",
+    "scope": "python"
+  },
+  "iPDB set trace": {
+    "prefix": "fs-ipdb",
+    "body": "__import__('ipdb').set_trace()$0",
+    "description": "Code snippet for ipdb debug",
+    "scope": "python"
+  },
+  "rPDB set trace": {
+    "prefix": "fs-rpdb",
+    "body": "import rpdb2; rpdb2.start_embedded_debugger('${1:debug_password}')$0",
+    "scope": "python"
+  },
+  "PuDB set trace": {
+    "prefix": "fs-pudb",
+    "body": "import pudb; pudb.set_trace()$0",
+    "description": "Code snippet for pudb debug",
+    "scope": "python"
+  },
+  "IPython set trace": {
+    "prefix": "fs-ipydb",
+    "body": "from IPython import embed; embed()$0",
+    "scope": "python"
+  },
+  "Celery set trace": {
+    "prefix": "fs-rdb",
+    "body": "from celery.contrib import rdb; rdb.set_trace()$0",
+    "description": "Code snippet for celery remote debugger breakpoint",
+    "scope": "python"
+  },
+  "Pretty print": {
+    "prefix": "fs-pprint",
+    "body": "__import__('pprint').pprint(${1:expression})$0",
+    "scope": "python"
+  },
+  "debugpy remote attach": {
+    "prefix": "fs-debugpy",
+    "body": [
+      "import debugpy, platform",
+      "debugpy.listen((platform.node(), ${1:5678}))",
+      "print(f\"debugpy listening on {platform.node()}:$1\", flush=True)",
+      "debugpy.wait_for_client()$0"
+    ],
+    "description": "Code snippet for debugpy remote attach",
+    "scope": "python"
+  }
+}

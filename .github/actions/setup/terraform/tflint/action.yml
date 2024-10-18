@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# ref: https://github.com/terraform-linters/tflint
+name: setup-tflint
+description: |
+  tflintのセットアップを行う
+runs:
+  using: composite
+  steps:
+    - name: source .env.tool-versions
+      uses: ./.github/actions/setup/common/source-env-tool-versions
+    - name: cache tflint binary
+      id: cache_tflint_binary
+      uses: actions/cache@v4.1.0
+      with:
+        path: /usr/local/bin/tflint
+        key: \
+          "${{ runner.os }}-\
+          tflint-\
+          binary-\
+          cache-\
+          ${{ env.TFLINT_VERSION }}"
+    - name: install tflint
+      if: >-
+        ${{ steps.cache_tflint_binary.outputs.cache-hit != 'true' }}
+      shell: bash
+      env:
+        TFLINT_VERSION: "${{ env.TFLINT_VERSION }}"
+      run: |
+        BINARY_NAME="tflint"; \
+        REPOSITORY_NAME="terraform-linters/tflint"; \
+        TAG_NAME="v${TFLINT_VERSION}"; \
+        TARGETARCH="$(dpkg --print-architecture)"; \
+        RELEASE_FILE_NAME_WO_EXTENSION="${BINARY_NAME}_linux_${TARGETARCH}"; \
+        RELEASE_FILE_NAME="${RELEASE_FILE_NAME_WO_EXTENSION}.zip"; \
+        wget --progress=dot:giga "https://github.com/${REPOSITORY_NAME}/releases/download/${TAG_NAME}/${RELEASE_FILE_NAME}" \
+        && unzip "${RELEASE_FILE_NAME}" \
+        && install -v -m 0755 "${BINARY_NAME}" /usr/local/bin \
+        && tflint --init; \
+    - name: cache tflint plugins
+      id: cache_tflint_plugins
+      uses: actions/cache@v4.1.0
+      with:
+        path: "${{ github.workspace }}/.tflint.d/plugins"
+        key: \
+          "${{ runner.os }}-\
+          tflint-\
+          plugins-\
+          cache-\
+          ${{ env.TERRAGRUNT_VERSION }}"
+    - name: init
+      shell: bash
+      run: |
+        tflint --recursive --init

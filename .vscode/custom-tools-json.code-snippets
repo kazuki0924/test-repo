@@ -1,0 +1,36 @@
+{
+  "latest-tag": {
+    "scope": "json",
+    "prefix": "tool.json-latest-tag",
+    "body": [
+      "{",
+      "\t\"name\": \"${1:hadolint}\",",
+      "\t\"command\": \"${1:hadolint}\",",
+      "\t\"repository\": \"${2:https://github.com/hadolint/hadolint}\",",
+      "\t\"version_env\": \"${3:HADOLINT}_VERSION\",",
+      "\t\"version\": \"latest-tag\",",
+      "\t\"version_option\": \"--version\",",
+      "\t\"bad_option\": \"--hoge\",",
+      "\t\"bad_option_message\": \"invalid option\"",
+      "},"
+    ],
+    "description": "for tools.json",
+  },
+  "noop-latest-tag": {
+    "scope": "json",
+    "prefix": "tool.json-noop-latest-tag",
+    "body": [
+      "{",
+      "\t\"name\": \"${1:hadolint}\",",
+      "\t\"command\": \"noop\",",
+      "\t\"repository\": \"${2:https://github.com/hadolint/hadolint}\",",
+      "\t\"version_env\": \"${3:HADOLINT}_VERSION\",",
+      "\t\"version\": \"latest-tag\",",
+      "\t\"version_option\": \"noop\",",
+      "\t\"bad_option\": \"noop\",",
+      "\t\"bad_option_message\": \"noop\"",
+      "},"
+    ],
+    "description": "for tools.json",
+  },
+}

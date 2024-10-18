@@ -1,0 +1,30 @@
+# name: 901_template_ci_app_python
+# run-name: template_ci_app_python
+# on:
+#   workflow_call: {}
+# concurrency:
+#   group: "${{ github.workflow }}-${{ github.ref }}"
+#   cancel-in-progress: true
+# defaults:
+#   run:
+#     shell: bash
+# permissions:
+#   id-token: write
+#   pull-requests: write
+#   contents: read
+# jobs:
+#   ruff_check:
+#     name: ruff check
+#     runs-on: ubuntu-24.04
+#     steps:
+#       - name: checkout
+#         uses: actions/checkout@v4.1.1
+#       - name: ruff_check
+#         id: ruff_check
+#         uses: ./.github/actions/ci/python/ruff/check
+
+# setup aws
+# ecr login
+# get_changed_workdirs
+# build docker image
+# push docker image

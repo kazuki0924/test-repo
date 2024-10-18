@@ -1,0 +1,51 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+# - composite actions:
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+# requirements:
+# - following envs set in .env.tool-versions:
+#   - TERRAFORM_VERSION
+#   - TERRAGRUNT_VERSION
+name: cd-terragrunt-plan
+description: |
+  terragrunt plan
+inputs:
+  WORKDIR:
+    description: |
+      working directory
+    required: true
+    default: "${{ github.workspace }}"
+runs:
+  using: composite
+  steps:
+    - name: setup terragrunt
+      uses: ./.github/actions/setup/terraform/terragrunt
+    # refs:
+    # - Terragrunt Caching
+    # - https://terragrunt.gruntwork.io/docs/features/caching/#clearing-the-terragrunt-cache
+    # - https://terragrunt.gruntwork.io/docs/reference/config-blocks-and-attributes/#download_dir
+    - name: cache .terragrunt-cache
+      id: cache_terragrunt
+      uses: actions/cache@v4.1.0
+      with:
+        path: "${{ inputs.WORKDIR }}/.terragrunt-cache"
+        key: "${{ runner.os }}-\
+          terragrunt-\
+          cache-\
+          ${{ env.TERRAGRUNT_VERSION }}-\
+          ${{ github.sha }}"
+        restore-keys: "${{ runner.os }}-\
+          terragrunt-\
+          cache-\
+          ${{ env.TERRAGRUNT_VERSION }}-"
+    - name: terragrunt plan
+      shell: bash
+      env:
+        TERRAGRUNT_NON_INTERACTIVE: true
+        TERRAGRUNT_PROVIDER_CACHE: 1
+        TERRAGRUNT_PROVIDER_CACHE_DIR: "${{ github.workspace }}/.terragrunt-provider-cache"
+      working-directory: "${{ inputs.WORKDIR }}"
+      run: |
+        terragrunt init -input=false
+        terragrunt plan -input=false

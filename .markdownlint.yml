@@ -1,0 +1,337 @@
+# ref: https://github.com/DavidAnson/markdownlint/tree/v0.34.0/doc
+#
+# Default state for all rules
+default: true
+# Path to configuration file to extend
+extends: null
+# MD001/heading-increment/header-increment - Heading levels should only increment by one level at a time
+# heading levelを飛ばして書くのを禁止(e.g. #の後に###で書き始める、等)
+# tags: headings
+MD001: true
+# MD003/heading-style/header-style - Heading style
+# headingの書き方を"#"で統一
+# tags: headings
+# MD002: # deprecated
+MD003:
+  # Heading style
+  # default: consistent
+  style: atx
+# MD004/ul-style - Unordered list style
+# ulの書き方を"-"で統一
+# tags: bullet, ul
+MD004:
+  # List style
+  # default: consistent
+  style: dash
+# MD005/list-indent - Inconsistent indentation for list items at the same level
+# ulのインデントを統一
+# tags: bullet, indentation, ul
+MD005: true
+# MD006: # deprecated
+# MD007/ul-indent - Unordered list indentation
+# ulのインデントスペースの指定
+# tags: bullet, indentation, ul
+MD007:
+  # Spaces for indent
+  indent: 2
+  # Whether to indent the first level of the list
+  start_indented: false
+  # Spaces for first level indent (when start_indented is set)
+  start_indent: 2
+# MD008: # deprecated
+# MD009/no-trailing-spaces - Trailing spaces
+# line break以外のtrailing spacesを禁止
+# tags: whitespace
+MD009:
+  # Spaces for line break
+  br_spaces: 2
+  # Allow spaces for empty lines in list items
+  list_item_empty_lines: false
+  # Include unnecessary breaks
+  strict: true
+# MD010/no-hard-tabs - Hard tabs
+# hard tabを禁止
+# tags: hard_tab, whitespace
+MD010:
+  # Include code blocks
+  code_blocks: true
+  # Fenced code languages to ignore
+  ignore_code_languages: []
+  # Number of spaces for each hard tab
+  spaces_per_tab: 2
+# MD011/no-reversed-links - Reversed link syntax
+# linkの書き方の間違いを検知
+# tags: links
+MD011: true
+# MD012/no-multiple-blanks - Multiple consecutive blank lines
+# 連続した空行を禁止
+# tags: blank_lines, whitespace
+MD012:
+  # Consecutive blank lines
+  maximum: 1
+# MD013/line-length - Line length
+# 行の長さに関するルール
+# tags: line_length
+MD013:
+  # Number of characters for code blocks
+  code_block_line_length: 120
+  # Include code blocks
+  code_blocks: true
+  # Number of characters for headings
+  heading_line_length: 120
+  # Include headings
+  headings: true
+  # Number of characters
+  line_length: 120
+  # Stern length checking
+  stern: true
+  # Strict length checking
+  strict: false
+  # Include tables
+  tables: true
+# MD014/commands-show-output - Dollar signs used before commands without showing output
+# コマンドをコードブロックに書く時に不必要な$をつけるのを禁止
+# 実行するコマンドとその出力を表示する場合は許可
+# tags: code
+MD014: true
+# MD015 # deprecated
+# MD016 # deprecated
+# MD017 # deprecated
+# MD018/no-missing-space-atx - No space after hash on atx style heading
+# headingの#の後にスペースを入れるのを必須にする
+# tags: atx, headings, space
+MD018: true
+# MD019/no-multiple-space-atx - Multiple spaces after hash on atx style heading
+# headingの#の後にスペースが複数入る事を禁止
+# tags: atx, headings, space
+MD019: true
+# MD020/no-missing-space-closed-atx - No space inside hashes on closed atx style heading
+# tags: atx_closed, headings, spaces
+# MD020: true
+# MD021/no-multiple-space-closed-atx - Multiple spaces inside hashes on closed atx style heading
+# tags: atx_closed, headings, spaces
+# MD021: true
+# MD022/blanks-around-headings/blanks-around-headers - Headings should be surrounded by blank lines
+# headingの前後に空行を入れるのを必須にする
+# tags: blank_lines, headings
+MD022:
+  # Blank lines above heading
+  lines_above: 1
+  # Blank lines below heading
+  lines_below: 1
+# MD023/heading-start-left/header-start-left - Headings must start at the beginning of the line
+# headingの#の前にスペースを入れるのを禁止
+# tags: headings, spaces
+MD023: true
+# MD024/no-duplicate-heading/no-duplicate-header - Multiple headings with the same content
+# 同じheading levelで重複するheadingの禁止
+# tags: headings
+MD024:
+  # Only check sibling headings
+  siblings_only: true
+# MD025/single-title/single-h1 - Multiple top-level headings in the same document
+# level 1のheadingは常に1つだけでなくてはならない
+# tags: headings
+MD025:
+  # Heading level
+  level: 1
+  # RegExp for matching title in front matter
+  front_matter_title: "^\\s*title\\s*[:=]"
+# MD026/no-trailing-punctuation - Trailing punctuation in heading
+# headingの最後に句読点を入れるのを禁止
+# tags: headings
+MD026:
+  # Punctuation characters
+  punctuation: ".,;:!。，；：！"
+# MD027/no-multiple-space-blockquote - Multiple spaces after blockquote symbol
+# >(blockquote)の後にスペースが複数入る事を禁止
+# tags: blockquote, indentation, whitespace
+MD027: true
+# MD028/no-blanks-blockquote - Blank line inside blockquote
+# blockquoteとblockquoteの間が空行だけの場合を禁止
+# tags: blockquote, whitespace
+MD028: true
+# MD029/ol-prefix - Ordered list item prefix
+# ordered listの数字がおかしい場合を検知(e.g. 1. 3.となっている、2. 2. 2.となっている、等)
+# tags: ol
+MD029:
+  # List style
+  style: one_or_ordered
+# MD030/list-marker-space - Spaces after list markers
+# listのマーカーの後にスペースを入れるのを必須にする
+# tags: ol, ul, whitespace
+MD030:
+  # Spaces for single-line unordered list items
+  ul_single: 1
+  # Spaces for single-line ordered list items
+  ol_single: 1
+  # Spaces for multi-line unordered list items
+  ul_multi: 1
+  # Spaces for multi-line ordered list items
+  ol_multi: 1
+# MD031/blanks-around-fences - Fenced code blocks should be surrounded by blank lines
+# fenced code blockの前後に空行を入れるのを必須にする
+# tags: blank_lines, code
+MD031:
+  # Include list items
+  list_items: true
+# MD032/blanks-around-lists - Lists should be surrounded by blank lines
+# listの前後に空行を入れるのを必須にする
+# tags: blank_lines, bullet, ol, ul
+MD032: true
+# MD033/no-inline-html - Inline HTML
+# HTMLタグはBRだけ許可
+# tags: html
+MD033:
+  # Allowed elements
+  # default: []
+  allowed_elements:
+    - BR
+# MD034/no-bare-urls - Bare URL used
+# 最低でもURLを<>で囲んで飛べるようにする事を必須にする
+# tags: links, url
+MD034: true
+# MD035/hr-style - Horizontal rule style
+# 水平線の書き方を"---"で統一
+# tags: hr
+MD035:
+  # Horizontal rule style
+  # default: consistent
+  style: "---"
+# MD036/no-emphasis-as-heading/no-emphasis-as-header - Emphasis used instead of a heading
+# emphasis(協調)をheadingの代わりに使う事を禁止
+# emphasis, headings
+MD036:
+  # Punctuation characters
+  punctuation: ".,;:!?。，；：！？"
+# MD037/no-space-in-emphasis - Spaces inside emphasis markers
+# emphasisの中にスペースを入れるのを禁止
+# tags: emphasis, whitespace
+MD037: true
+# MD038/no-space-in-code - Spaces inside code span elements
+# code span elementsのbackticksの中にと前後にスペースを入れるのを禁止
+# tags: code, whitespace
+MD038: true
+# MD039/no-space-in-links - Spaces inside link text
+# link textの前後にスペースを入れるのを禁止
+# tags: links, whitespace
+MD039: true
+# MD040/fenced-code-language - Fenced code blocks should have a language specified
+# fenced code blockに言語を指定する事を必須にする
+# tags: code, language
+MD040: true
+# MD041/first-line-heading/first-line-h1 - First line in a file should be a top-level heading
+# 最初の行はheading level 1でなくてはならない
+# tags: headings
+MD041:
+  # Heading level
+  level: 1
+  # RegExp for matching title in front matter
+  front_matter_title: "^\\s*title\\s*[:=]"
+# MD042/no-empty-links - No empty links
+# 中身の無いlinkを禁止
+# tags: links
+MD042: true
+# MD043/required-headings/required-headers - Required heading structure
+# 必要なheadingがあるかどうかを検知
+# tags: headings
+# MD043:
+#   list of headings
+#   headings: []
+#   match case of headings
+#   match_case: false
+# MD044/proper-names - Proper names should have the correct capitalization
+# 指定のcapitalizationの間違いを検知
+# tags: spelling
+MD044:
+  # List of proper names
+  # default: []
+  names:
+    - terraform
+    - terragrunt
+    - aws
+    - AWS
+    - python
+    - GitHub
+    - github
+    - Git
+    - git
+    - NewRelic
+  # Include code blocks
+  code_blocks: false
+  # Include HTML elements
+  html_elements: true
+# MD045/no-alt-text - Images should have alternate text (alt text)
+# alt textが無いimageを禁止
+# tags: accessibility, images
+MD045: true
+# MD046/code-block-style - Code block style
+# code blockの書き方を"```"(fenced)で統一
+# tags: code
+MD046:
+  # Block style
+  # default: consistent
+  style: fenced
+# MD047/single-trailing-newline - Files should end with a single newline character
+# ファイルの最後に空行を入れる事を必須にする
+# tags: blank_lines
+MD047: true
+# MD048/code-fence-style - Code fence style
+# fenced code blockをbacktickで統一
+# tags: code
+MD048:
+  # Code fence style
+  # default: consistent
+  style: backtick
+# MD049/emphasis-style - Emphasis style should be consistent
+# emphasisの書き方を"*"(asterisk)で統一
+# tags: emphasis
+MD049:
+  # Emphasis style
+  # default: consistent
+  style: asterisk
+# MD050/strong-style - Strong style should be consistent
+# strong styleの書き方を"**"(asterisk)で統一
+# tags: emphasis
+MD050:
+  # Strong style
+  style: asterisk
+# MD051/link-fragments - Link fragments should be valid
+# linkのfragmentが正しいかどうかを検知
+# tags: links
+MD051: true
+# MD052/reference-links-images - Reference links and images should use a label that is defined
+# labelが定義されていないreference link, imageを禁止
+# tags: images, links
+MD052:
+  shortcut_syntax: true
+# MD053/link-image-reference-definitions - Link and image reference definitions should be needed
+# 使用されていないreference link, imageを検知
+# tags: images, links
+MD053:
+  # Ignored definitions
+  ignored_definitions:
+    - //
+# MD054/link-image-style - Link and image style
+# link, imageの書き方の制限
+# tags: images, links
+MD054:
+  # not recommended
+  autolink: true
+  collapsed: false
+  full: false
+  # preferred
+  inline: true
+  # preferred
+  shortcut: true
+  url_inline: false
+# MD055/table-pipe-style - Table pipe style
+# tableの書き方を統一
+# tags: table, GitHub Flavored Markdown table
+MD055:
+  # default: consistent
+  style: leading_and_trailing
+# MD056/table-column-count - Table column count
+# 統一されていないtableのcolumn数を検知
+# tags: table, GitHub Flavored Markdown table
+MD056: true

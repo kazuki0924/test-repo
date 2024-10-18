@@ -1,0 +1,57 @@
+// fetched from: https://github.com/rafamadriz/friendly-snippets via python script
+{
+  "List comprehension": {
+    "prefix": "fs-lc",
+    "body": "[${1:value} for ${2:value} in ${3:iterable}]$0",
+    "description": "List comprehension for creating a list based on existing lists.",
+    "scope": "python"
+  },
+  "List comprehension if else": {
+    "prefix": "fs-lcie",
+    "body": "[${1:value} if ${2:condition} else ${3:condition} for ${4:value} in ${5:iterable}]$0",
+    "description": "List comprehension for creating a list based on existing lists, with conditional if-else statement.",
+    "scope": "python"
+  },
+  "List comprehension if filter": {
+    "prefix": "fs-lci",
+    "body": "[${1:value} for ${2:value} in ${3:iterable} if ${4:condition}$0]",
+    "description": "List comprehension for creating a list based on existing lists, with conditional if statement.",
+    "scope": "python"
+  },
+  "Dictionary comprehension": {
+    "prefix": "fs-dc",
+    "body": "{${1:key}: ${2:value} for ${3:key}, ${4:value} in ${5:iterable}}$0",
+    "description": "Handy and faster way to create dictionaries based on existing dictionaries.",
+    "scope": "python"
+  },
+  "Dictionary comprehension if filter": {
+    "prefix": "fs-dci",
+    "body": "{${1:key}: ${2:value} for ${3:key}, ${4:value} in ${5:iterable} if ${6:condition}}$0",
+    "description": "Handy and faster way to create dictionaries based on existing dictionaries, with conditional if statement.",
+    "scope": "python"
+  },
+  "Set comprehension": {
+    "prefix": "fs-sc",
+    "body": "{${1:value} for ${2:value} in ${3:iterable}}$0",
+    "description": "Create a set based on existing iterables.",
+    "scope": "python"
+  },
+  "Set Comprehension if filter": {
+    "prefix": "fs-sci",
+    "body": "{${1:value} for ${2:value} in ${3:iterable} if ${4:condition}}$0",
+    "description": "Create a set based on existing iterables, with condition if statement.",
+    "scope": "python"
+  },
+  "Generator comprehension": {
+    "prefix": "fs-gc",
+    "body": "(${1:key} for ${2:value} in ${3:iterable})$0",
+    "description": "Create a generator based on existing iterables.",
+    "scope": "python"
+  },
+  "Generator comprehension if filter": {
+    "prefix": "fs-gci",
+    "body": "(${1:key} for ${2:value} in ${3:iterable} if ${4:condition})$0",
+    "description": "Create a generator based on existing iterables, with condition if statement.",
+    "scope": "python"
+  }
+}

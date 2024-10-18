@@ -1,0 +1,40 @@
+# ref:
+# - https://developer.hashicorp.com/terraform/language/expressions/version-constraints
+# - https://developer.hashicorp.com/terraform/language/providers/requirement
+terraform {
+  required_version = "~> ${terraform_version}"
+
+  # A module may have only one required providers configuration
+  required_providers {
+    # ref: https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> ${terraform_provider_main_version}"
+    }
+    local = {
+      # ref: https://registry.terraform.io/providers/hashicorp/local/latest/docs
+      source  = "hashicorp/local"
+      version = "~> ${terraform_provider_local_version}"
+    }
+    null = {
+      # ref: https://registry.terraform.io/providers/hashicorp/null/latest/docs
+      source  = "hashicorp/null"
+      version = "~> ${terraform_provider_null_version}"
+    }
+    random = {
+      # ref: https://registry.terraform.io/providers/hashicorp/random/latest/docs
+      source  = "hashicorp/random"
+      version = "~> ${terraform_provider_random_version}"
+    }
+    external = {
+      # ref: https://registry.terraform.io/providers/hashicorp/external/latest/docs
+      source  = "hashicorp/external"
+      version = "~> ${terraform_provider_external_version}"
+    }
+    assert = {
+      # ref: https://registry.terraform.io/providers/hashicorp/assert/latest/docs
+      source  = "hashicorp/assert"
+      version = "~> ${terraform_provider_assert_version}"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+../../../../../infra/terraform/aws/shared/provider.tf

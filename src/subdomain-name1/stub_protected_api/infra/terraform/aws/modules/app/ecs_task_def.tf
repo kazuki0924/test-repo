@@ -1,0 +1,1 @@
+../../../../../../../../infra/terraform/aws/modules/app/ecs_task_def.tf

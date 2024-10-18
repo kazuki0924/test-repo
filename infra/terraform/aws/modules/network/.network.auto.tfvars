@@ -1,0 +1,1 @@
+../../shared/.network.auto.tfvars

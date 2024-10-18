@@ -1,0 +1,591 @@
+// fetched from: https://github.com/rafamadriz/friendly-snippets via python script
+{
+  "Version": {
+    "prefix": "fs-ver",
+    "body": [
+      "version: '${1:3}'"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Volumes": {
+    "prefix": "fs-volumes",
+    "body": [
+      "volumes:",
+      "\t\t- ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Volume Driver": {
+    "prefix": "fs-volume_",
+    "body": [
+      "volume_driver: ${1:driver}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Volumes From": {
+    "prefix": "fs-volumes_",
+    "body": [
+      "volumes_from:",
+      "\t\t- ${1:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "External": {
+    "prefix": "fs-exter",
+    "body": [
+      "external: ${1:boolean}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Services": {
+    "prefix": "fs-ser",
+    "body": [
+      "services:",
+      "\t\t${1:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Build": {
+    "prefix": "fs-bu",
+    "body": [
+      "build:",
+      "\t\t${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Context": {
+    "prefix": "fs-conte",
+    "body": [
+      "context: ${1:dir}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Command": {
+    "prefix": "fs-com",
+    "body": [
+      "command: ${1:command}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Depends on": {
+    "prefix": "fs-dep",
+    "body": [
+      "depends_on:",
+      "\t\t${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Environment": {
+    "prefix": "fs-env",
+    "body": [
+      "environment:",
+      "\t\t${1:name}: ${2:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Dockerfile": {
+    "prefix": "fs-doc",
+    "body": [
+      "dockerfile: ${1:file}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Args": {
+    "prefix": "fs-ar",
+    "body": [
+      "args:",
+      "\t\t${1:name}: ${2:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Cap Add": {
+    "prefix": "fs-cap_a",
+    "body": [
+      "cap_add:",
+      "\t\t- ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Cap Drop": {
+    "prefix": "fs-cap_d",
+    "body": [
+      "cap_drop:",
+      "\t\t- ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "cgroup_parent": {
+    "prefix": "fs-cgr",
+    "body": [
+      "cgroup_parent: ${1:cgroup}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Container Name": {
+    "prefix": "fs-conta",
+    "body": [
+      "container_name: ${1:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Devices": {
+    "prefix": "fs-dev",
+    "body": [
+      "devices:",
+      "\t\t- ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "DNS": {
+    "prefix": "fs-dn",
+    "body": [
+      "dns:",
+      "\t\t- ${1:ip}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "DNS Search": {
+    "prefix": "fs-dns_",
+    "body": [
+      "dns_search:",
+      "\t\t- ${1:ip}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "tmpfs": {
+    "prefix": "fs-tm",
+    "body": [
+      "tmpfs:",
+      "\t\t- ${1:dir}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Entrypoint": {
+    "prefix": "fs-ent",
+    "body": [
+      "entrypoint: ${1:command}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Env File": {
+    "prefix": "fs-env_",
+    "body": [
+      "env_file:",
+      "\t\t- ${1:file}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Expose": {
+    "prefix": "fs-exp",
+    "body": [
+      "expose:",
+      "\t\t- ${1:port}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Extends": {
+    "prefix": "fs-exten",
+    "body": [
+      "extends:",
+      "\t\tfile: ${1:file}",
+      "\t\tservice: ${2:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Extra Hosts": {
+    "prefix": "fs-extr",
+    "body": [
+      "extra_hosts:",
+      "\t\t- ${1:host}:${2:ip}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Group Add": {
+    "prefix": "fs-gr",
+    "body": [
+      "group_add:",
+      "\t\t- ${1:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Image": {
+    "prefix": "fs-im",
+    "body": [
+      "image: ${1:image}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Labels": {
+    "prefix": "fs-la",
+    "body": [
+      "labels:",
+      "\t\t${1:dns}: ${2:label}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Links": {
+    "prefix": "fs-links",
+    "body": [
+      "links:",
+      "\t\t- ${1:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Logging": {
+    "prefix": "fs-logg",
+    "body": [
+      "logging:",
+      "\t\tdriver: ${1:driver}",
+      "\t\toptions:",
+      "\t\t\t${2:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Log Driver": {
+    "prefix": "fs-log_d",
+    "body": [
+      "log_driver: ${1:driver}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Log Options": {
+    "prefix": "fs-log_o",
+    "body": [
+      "log_opt:",
+      "\t\t${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Net": {
+    "prefix": "fs-net",
+    "body": [
+      "net: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Network Mode": {
+    "prefix": "fs-network_",
+    "body": [
+      "network_mode: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Networks": {
+    "prefix": "fs-networks",
+    "body": [
+      "networks:",
+      "\t\t- ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Ipv4 Address": {
+    "prefix": "fs-ipv4",
+    "body": [
+      "ipv4_address: ${1:ip}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Ipv6 Address": {
+    "prefix": "fs-ipv6",
+    "body": [
+      "ipv6_address: ${1:ip}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Link Local IPs": {
+    "prefix": "fs-link_",
+    "body": [
+      "link_local_ips:",
+      "\t\t- ${1:ip}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "PID": {
+    "prefix": "fs-pi",
+    "body": [
+      "pid: ${1:host}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Ports": {
+    "prefix": "fs-po",
+    "body": [
+      "ports:",
+      "\t\t- ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Security Opt": {
+    "prefix": "fs-sec",
+    "body": [
+      "security_opt:",
+      "\t\t- ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Stop Signal": {
+    "prefix": "fs-sto",
+    "body": [
+      "stop_signal: ${1:signal}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Ulimits": {
+    "prefix": "fs-ul",
+    "body": [
+      "ulimits:",
+      "\t\t${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "CPU Shares": {
+    "prefix": "fs-cpu_s",
+    "body": [
+      "cpu_shares: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "CPU Quota": {
+    "prefix": "fs-cpu_q",
+    "body": [
+      "cpu_quota: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "CPU Set": {
+    "prefix": "fs-cpus",
+    "body": [
+      "cpuset: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Domain Name": {
+    "prefix": "fs-dom",
+    "body": [
+      "domainname: ${1:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Hostname": {
+    "prefix": "fs-ho",
+    "body": [
+      "hostname: ${1:name}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "IPC": {
+    "prefix": "fs-ipc",
+    "body": [
+      "ipc: ${1:host}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Memory Limit": {
+    "prefix": "fs-mem_",
+    "body": [
+      "mem_limit: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Mem swap Limit": {
+    "prefix": "fs-mems",
+    "body": [
+      "memswap_limit: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Privileged": {
+    "prefix": "fs-pr",
+    "body": [
+      "privileged: ${1:boolean}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "OOM Score Adj": {
+    "prefix": "fs-oom",
+    "body": [
+      "oom_score_adj: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Restart": {
+    "prefix": "fs-res",
+    "body": [
+      "restart: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "User": {
+    "prefix": "fs-us",
+    "body": [
+      "user: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Working Directory": {
+    "prefix": "fs-wo",
+    "body": [
+      "working_dir: ${1:dir}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Read Only": {
+    "prefix": "fs-rea",
+    "body": [
+      "read_only: ${1:boolean}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "SHM Size": {
+    "prefix": "fs-sh",
+    "body": [
+      "shm_size: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Stdin Open": {
+    "prefix": "fs-std",
+    "body": [
+      "stdin_open: ${1:boolean}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "TTY": {
+    "prefix": "fs-tt",
+    "body": [
+      "tty: ${1:boolean}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Driver": {
+    "prefix": "fs-driver",
+    "body": [
+      "driver: ${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Driver Opts": {
+    "prefix": "fs-driver_",
+    "body": [
+      "driver_opts:",
+      "\t\t${1:key}: ${2:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "IPAM": {
+    "prefix": "fs-ipa",
+    "body": [
+      "ipam:",
+      "\t\t${1:value}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "Health Check": {
+    "prefix": "fs-hc",
+    "body": [
+      "healthcheck:",
+      "\t\ttest: ${1:command}"
+    ],
+    "description": "",
+    "scope": "dockercompose,yaml"
+  },
+  "DockerCompose": {
+    "prefix": "fs-docker-compose",
+    "body": [
+      "version: '3'",
+      "services:",
+      "\t$1:",
+      "\t\timage: ${2:image}",
+      "\t\tcontainer_name: ${3:container_name}",
+      "\t\tports:",
+      "\t\t\t- \"${4:host_port}:${5:container_port}\"",
+      "\t\tvolumes:",
+      "\t\t\t- ${6:host_volume}:${7:container_volume}",
+      "\t\tenvironment:",
+      "\t\t\t- ${8:env_var}=${9:env_value}"
+    ],
+    "description": "A full Docker Compose example snippet",
+    "scope": "dockercompose,yaml"
+  },
+  "JenkinsCompose": {
+    "prefix": "fs-jenkins-compose",
+    "body": [
+      "jenkins:",
+      "\timage: jenkins/jenkins:lts",
+      "\tcontainer_name: jenkins",
+      "\tports:",
+      "\t\t- \"8080:8080\"",
+      "\t\t- \"50000:50000\"",
+      "\tvolumes:",
+      "\t\t- jenkins_home:/var/jenkins_home",
+      "\tenvironment:",
+      "\t\t- JENKINS_OPTS=--prefix=/Jenkins"
+    ],
+    "description": "A Jenkins Docker Compose example snippet",
+    "scope": "dockercompose,yaml"
+  }
+}

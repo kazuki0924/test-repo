@@ -1,0 +1,100 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "editor.minimap.enabled": false,
+  "workbench.colorTheme": "Default Dark Modern",
+  "workbench.iconTheme": "symbols",
+  // To install cascadia-code:
+  // https://github.com/microsoft/cascadia-code
+  // macOS/Linux:
+  // brew install --cask font-cascadia-code-nf
+  // 入れなくてもfallbackでVS Codeのデフォルトのフォントが使われる
+  // これによりdevcontainerのターミナルに表示されるgit branch名などの追加の情報の横のアイコンが◻︎（そのアイコンが使えるフォントを使ってない場合に現れる）になる事を回避出来る
+  // 別のフォントを入れてVS Codeの個人設定で指定する事で変更する事も可能
+  "editor.fontFamily": "'Cascadia Code NF', 'Cascadia Mono NF', 'Cascadia Code PL', 'Cascadia Mono PL', 'Cascadia Code', 'Cascadia Mono', Menlo, Monaco, 'Courier New', monospace",
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": true,
+  "editor.quickSuggestions": {
+    "comments": "on",
+    "strings": "on"
+  },
+  "editor.snippetSuggestions": "top",
+  "files.associations": {
+    ".env*": "dotenv",
+    "*compose.yml": "yaml",
+    "*.tfvars": "terraform-vars",
+    "*.tftpl": "jinja-terraform",
+    "*.tpl": "hcl",
+    "*.tftest.hcl": "hcl",
+    ".terraformrc": "hcl",
+    ".bash_history": "text"
+  },
+  "[terraform, terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform"
+  },
+  "[hcl]": {
+    "editor.defaultFormatter": "fredwangwang.vscode-hcl-format"
+  },
+  "terraform.experimentalFeatures.validateOnSave": true,
+  "terraform.experimentalFeatures.prefillRequiredFields": true,
+  "terraform.validation.enableEnhancedValidation": true,
+  "terraform.codelens.referenceCount": true,
+  "terraform.languageServer.ignoreSingleFileWarning": false,
+  "[yaml, github-actions-workflow, dockercompose]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[json, jsonc, html, javascript, javascriptreact, typescript, vue]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "[dockerfile]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "[shellscript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "mkhl.shfmt"
+  },
+  "[snippets]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "eslint.validate": [
+    "json",
+    "jsonc",
+    "yaml",
+    "dockercompose",
+    "github-actions-workflow",
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "vue-html"
+  ],
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "eslint.useFlatConfig": true,
+  "dotenv.enableAutocloaking": false,
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports.ruff": "always",
+      "source.fixAll.ruff": "always"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "python.testing.pytestArgs": ["-vv"],
+  "python.testing.pytestEnabled": true,
+  "python.testing.unittestEnabled": false,
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.completeFunctionParens": true,
+  "python.analysis.extraPaths": ["${workspaceFolder}", "${workspaceFolder}/scripts/python"],
+  "python.autoComplete.extraPaths": ["${workspaceFolder}", "${workspaceFolder}/scripts/python"],
+  "japanese-proofreading.textlint.技術用語": false,
+  "yaml.customTags": ["tag:yaml.org,2002:merge"],
+  "terminal.integrated.scrollback": 10000,
+  "tftoolbox.iac.enableAutoModuleFetch": true,
+  "tftoolbox.iac.enableAutoProviderInitialization": false,
+  "editor.wordWrap": "on"
+}

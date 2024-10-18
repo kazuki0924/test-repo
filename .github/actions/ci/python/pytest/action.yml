@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+name: ci-pytest
+description: |
+  pytest
+  pythonのunit testを行う
+runs:
+  using: composite
+  steps:
+    - name: setup pytest
+      uses: ./.github/actions/setup/python/pytest
+    - name: pytest
+      shell: bash
+      run: pytest

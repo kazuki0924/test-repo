@@ -1,0 +1,39 @@
+
+# yaml-language-server: $schema=https://json.schemastore.org/github-action.json
+# refs:
+# - composite actions:
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/metadata-syntax-for-github-actions#runs-for-composite-actions
+#   - https://docs.github.com/en/actions/sharing-automations/creating-actions/creating-a-composite-action
+# - docker docs: Checking your build configuration
+#   - https://docs.docker.com/build/checks/
+# requirements:
+# - setting up buildx prior to running this action:
+#   - ./.github/actions/setup/docker
+name: build-check
+description: |
+  docker build checkのみを行う
+inputs:
+  WORKDIR:
+    description: |
+      docker buildコマンドの実行ディレクトリ
+    required: true
+    default: .
+  CONTEXT:
+    description: |
+      docker build内の実行ディレクトリ
+    required: true
+    default: .
+runs:
+  using: composite
+  steps:
+    - name: docker build check
+      shell: bash
+      run: >-
+        docker
+        build
+        --check
+        --file
+        ${{ inputs.WORKDIR }}/Dockerfile
+        --build-arg
+        BUILDKIT_DOCKERFILE_CHECK=error=true
+        ${{ inputs.CONTEXT }}

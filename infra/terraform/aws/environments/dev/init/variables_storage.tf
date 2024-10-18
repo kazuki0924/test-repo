@@ -1,0 +1,1 @@
+../../../../../../infra/terraform/aws/modules/storage/variables_storage.tf

@@ -1,0 +1,98 @@
+[
+  {
+    "file": {
+      "from_path": "snippets/terraform.json",
+      "to_path": ".vscode/friendly-snippets-terraform.code-snippets"
+    },
+    "scope": "terraform,terraform-vars,hcl",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/docker/docker_file.json",
+      "to_path": ".vscode/friendly-snippets-docker-file.code-snippets"
+    },
+    "scope": "dockerfile",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/docker/docker-compose.json",
+      "to_path": ".vscode/friendly-snippets-docker-compose.code-snippets"
+    },
+    "scope": "dockercompose,yaml",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/markdown.json",
+      "to_path": ".vscode/friendly-snippets-markdown.code-snippets"
+    },
+    "scope": "markdown",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/make.json",
+      "to_path": ".vscode/friendly-snippets-makefile.code-snippets"
+    },
+    "scope": "makefile",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/shell/shell.json",
+      "to_path": ".vscode/friendly-snippets-shellscript.code-snippets"
+    },
+    "scope": "shellscript",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/shell/shelldoc.json",
+      "to_path": ".vscode/friendly-snippets-shelldoc.code-snippets"
+    },
+    "scope": "shellscript",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/python/python.json",
+      "to_path": ".vscode/friendly-snippets-python.code-snippets"
+    },
+    "scope": "python",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/python/unittest.json",
+      "to_path": ".vscode/friendly-snippets-python-unittest.code-snippets"
+    },
+    "scope": "python",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/python/debug.json",
+      "to_path": ".vscode/friendly-snippets-python-debug.code-snippets"
+    },
+    "scope": "python",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/python/comprehension.json",
+      "to_path": ".vscode/friendly-snippets-python-comprehension.code-snippets"
+    },
+    "scope": "python",
+    "prefix": "fs-"
+  },
+  {
+    "file": {
+      "from_path": "snippets/python/pydoc.json",
+      "to_path": ".vscode/friendly-snippets-python-pydoc.code-snippets"
+    },
+    "scope": "python",
+    "prefix": "fs-"
+  }
+]

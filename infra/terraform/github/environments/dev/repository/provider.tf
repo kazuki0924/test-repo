@@ -1,0 +1,1 @@
+../../../../../../infra/terraform/github/shared/provider.tf

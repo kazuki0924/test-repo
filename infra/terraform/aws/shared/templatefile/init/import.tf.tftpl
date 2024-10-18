@@ -1,0 +1,57 @@
+# imports need to be in root module
+# ref: https://developer.hashicorp.com/terraform/language/import
+
+import {
+  to = module.init.aws_s3_bucket.this["tfstate"]
+  id = "${s3_bucket_tfstate_id}"
+}
+
+import {
+  to = module.init.aws_dynamodb_table.this["tfstate-lock"]
+  id = "${dynamodb_table_tfstate_lock_id}"
+}
+
+%{~ if is_github_oidc_provider_exists ~}
+
+import {
+  to = module.init.aws_iam_role.github_actions
+  id = "${iam_role_github_actions_id}"
+}
+
+import {
+  to = module.init.aws_iam_openid_connect_provider.github
+  id = "${iam_openid_connect_provider_github_id}"
+}
+
+%{~ endif ~}
+%{~ if is_sops_kms_exist ~}
+
+import {
+  to = module.init.aws_kms_key.sops[0]
+  id = "${sops_kms_key_id}"
+}
+
+import {
+  to = module.init.aws_kms_alias.primary[0]
+  id = "alias/${kms_sops_alias_primary}"
+}
+
+import {
+  to = module.init.aws_kms_replica_key.sops[0]
+  id = "${sops_kms_key_id}"
+}
+
+import {
+  to = module.init.aws_kms_alias.replica[0]
+  id = "alias/${kms_sops_alias_replica}"
+}
+
+%{~ endif ~}
+%{~ if is_subdomain_aws_route53_zone_exists ~}
+
+import {
+  to = module.init.aws_route53_zone.subdomain["main"]
+  id = "${route53_zone_subdomain_id}"
+}
+
+%{~ endif ~}

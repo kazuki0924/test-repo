@@ -21,6 +21,7 @@ sudo apt install docker.io
 sudo groupadd docker
 sudo usermod -aG docker $USER
 sudo service docker start
+brew install bash git gh aws wslu
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 export AWS_DEFAULT_REGION="ap-northeast-1"
@@ -33,6 +34,8 @@ aws configure --profile "${PROFILE_NAME}" set sso_region "${AWS_DEFAULT_REGION}"
 aws configure --profile "${PROFILE_NAME}" set sso_account_id "${AWS_ACCOUNT_ID}"
 aws configure --profile "${PROFILE_NAME}" set sso_role_name "${ROLE_NAME}"
 aws sso login --profile "${PROFILE_NAME}"
+gh auth login
+# ここでSSH KeyのSSO Configurationを実施する必要あり https://github.com/settings/keys
 gh repo clone wcm-eas/xev-vpp-infra-templates
 cd xev-vpp-infra-templates
 code .

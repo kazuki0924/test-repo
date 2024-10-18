@@ -42,17 +42,6 @@ if [[ "${DELETE_KMS:-"false"}" == "true" ]]; then
   done
 fi
 
-# VPC Endpoint Services
-VPC_ENDPOINT_SERVICES="$(aws ec2 describe-vpc-endpoint-service-configurations --query "ServiceConfigurations[*].ServiceId" --output text)"
-if [[ -z "${VPC_ENDPOINT_SERVICES}" ]]; then
-  echo "no VPC Endpoint Services found."
-else
-  for SERVICE_ID in ${VPC_ENDPOINT_SERVICES}; do
-    echo "deleting VPC Endpoint Service: ${SERVICE_ID}"
-    aws ec2 delete-vpc-endpoint-service-configurations --service-ids "${SERVICE_ID}"
-  done
-fi
-
 # Elastic Load Balancers
 ELB_ARNS="$(aws elbv2 describe-load-balancers --query "LoadBalancers[*].LoadBalancerArn" --output text)"
 if [[ -z "${ELB_ARNS}" ]]; then
@@ -114,6 +103,17 @@ else
   set -e
 fi
 
+# VPC Endpoint Services
+VPC_ENDPOINT_SERVICES="$(aws ec2 describe-vpc-endpoint-service-configurations --query "ServiceConfigurations[*].ServiceId" --output text)"
+if [[ -z "${VPC_ENDPOINT_SERVICES}" ]]; then
+  echo "no VPC Endpoint Services found."
+else
+  for SERVICE_ID in ${VPC_ENDPOINT_SERVICES}; do
+    echo "deleting VPC Endpoint Service: ${SERVICE_ID}"
+    aws ec2 delete-vpc-endpoint-service-configurations --service-ids "${SERVICE_ID}"
+  done
+fi
+
 [[ "${DELETE_ELB_ONLY:-"false"}" == "true" ]] && exit 0
 
 # EventBridge Schedules
@@ -135,7 +135,6 @@ else
   for SCHEDULE_GROUP_ARN in ${EVENT_BRIDGE_SCHEDULE_GROUPS}; do
     SCHEDULE_GROUP_NAME="${SCHEDULE_GROUP_ARN##*/}"
     if [[ "${SCHEDULE_GROUP_NAME}" == "default" ]]; then
-      echo "skipping deletion of default schedule group"
       continue
     fi
     echo "deleting EventBridge schedule group: ${SCHEDULE_GROUP_ARN}"

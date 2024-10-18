@@ -142,3 +142,7 @@ gh auth login
     - GitHub用にすでに作成してある場合はそれを指定する
   - How would you like to authenticate GitHub CLI? `Login with a web browser`
     - 以降はプロンプトの指示に従う
+
+### Configure SSO
+
+新規作成したSSHキーのSSOをwcm-easで設定する事でgh repo cloneなどが出来るようになる: <https://github.com/settings/keys>
